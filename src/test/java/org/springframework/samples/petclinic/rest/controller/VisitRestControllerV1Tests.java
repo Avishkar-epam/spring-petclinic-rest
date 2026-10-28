@@ -20,6 +20,8 @@ import org.springframework.samples.petclinic.rest.controller.v1.VisitRestControl
 import tools.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -36,15 +38,20 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -166,12 +173,62 @@ class VisitRestControllerV1Tests {
     void testCreateVisitSuccess() throws Exception {
     	Visit newVisit = visits.get(0);
     	newVisit.setId(999);
+        given(this.clinicService.findPetById(8)).willReturn(newVisit.getPet());
+        given(this.clinicService.findVisitsByPetId(8)).willReturn(List.of());
     	ObjectMapper mapper = new ObjectMapper();
         String newVisitAsJSON = mapper.writeValueAsString(visitMapper.toVisitDto(newVisit));
     	System.out.println("newVisitAsJSON " + newVisitAsJSON);
-    	this.mockMvc.perform(post("/api/visits")
+    	MvcResult result = this.mockMvc.perform(post("/api/visits")
     		.content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
-    		.andExpect(status().isCreated());
+    		.andReturn();
+
+        assertThat(result.getResponse().getStatus()).isEqualTo(201);
+        assertThat(result.getResponse().getHeader("Location")).isNotBlank();
+    }
+
+    @ParameterizedTest
+    @CsvSource({"2013-01-01", "2020-02-29"})
+    @WithMockUser(roles="OWNER_ADMIN")
+    void testCreateVisitWithPastDateReturns400(String date) throws Exception {
+        String newVisitAsJSON = "{\"date\":\"" + date + "\",\"description\":\"rabies shot\",\"petId\":8}";
+
+        MvcResult result = this.mockMvc.perform(post("/api/visits")
+                .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andReturn();
+
+        assertThat(result.getResponse().getStatus()).isEqualTo(400);
+        verify(this.clinicService, never()).saveVisit(any(Visit.class));
+    }
+
+    @Test
+    @WithMockUser(roles="OWNER_ADMIN")
+    void testCreateVisitWithUnknownPositivePetIdReturns400() throws Exception {
+        String newVisitAsJSON = "{\"date\":\"" + LocalDate.now().plusDays(1) + "\",\"description\":\"rabies shot\",\"petId\":8}";
+        given(this.clinicService.findPetById(8)).willReturn(null);
+
+        MvcResult result = this.mockMvc.perform(post("/api/visits")
+                .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andReturn();
+
+        assertThat(result.getResponse().getStatus()).isEqualTo(400);
+        verify(this.clinicService, never()).saveVisit(any(Visit.class));
+    }
+
+    @Test
+    @WithMockUser(roles="OWNER_ADMIN")
+    void testCreateVisitWithDuplicateSamePetAndDateReturns400() throws Exception {
+        Visit duplicateVisit = visits.get(0);
+        given(this.clinicService.findPetById(8)).willReturn(duplicateVisit.getPet());
+        given(this.clinicService.findVisitsByPetId(8)).willReturn(List.of(duplicateVisit));
+        ObjectMapper mapper = new ObjectMapper();
+        String newVisitAsJSON = mapper.writeValueAsString(visitMapper.toVisitDto(duplicateVisit));
+
+        MvcResult result = this.mockMvc.perform(post("/api/visits")
+                .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andReturn();
+
+        assertThat(result.getResponse().getStatus()).isEqualTo(400);
+        verify(this.clinicService, never()).saveVisit(any(Visit.class));
     }
 
     @Test

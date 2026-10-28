@@ -20,6 +20,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.mapper.VisitMapper;
+import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.rest.api.VisitsApi;
 import org.springframework.samples.petclinic.rest.model.VisitDto;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +78,19 @@ public class VisitRestControllerV1 implements VisitsApi {
     @Override
     public ResponseEntity<VisitDto> addVisit(VisitDto visitDto) {
         HttpHeaders headers = new HttpHeaders();
+        LocalDate visitDate = visitDto.date();
+        if (visitDate != null && visitDate.isBefore(LocalDate.now())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Pet pet = this.clinicService.findPetById(visitDto.petId());
+        if (pet == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        boolean duplicateVisit = this.clinicService.findVisitsByPetId(visitDto.petId()).stream()
+            .anyMatch(existingVisit -> visitDate != null && visitDate.equals(existingVisit.getDate()));
+        if (duplicateVisit) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         Visit visit = visitMapper.toVisit(visitDto);
         this.clinicService.saveVisit(visit);
         visitDto = visitMapper.toVisitDto(visit);
