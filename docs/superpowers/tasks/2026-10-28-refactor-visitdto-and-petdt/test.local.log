@@ -1,0 +1,1622 @@
+WARNING: A restricted method in java.lang.foreign.MemorySegment has been called
+WARNING: java.lang.foreign.MemorySegment::reinterpret has been called by org.jline.terminal.impl.ffm.FfmTerminalProvider in an unnamed module (file:/C:/Users/avishkar_rajendran/.m2/wrapper/dists/apache-maven-3.10.0-bin/9e1da7b8/apache-maven-3.10.0/lib/jline-terminal-ffm-3.30.17.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+[INFO] Scanning for projects...
+[INFO] Loaded 24271 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] 
+[INFO] ---------< org.springframework.samples:spring-petclinic-rest >----------
+[INFO] Building spring-petclinic-rest 4.0.2
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.5.1/maven-jar-plugin-3.5.1.pom
+Progress (1): 778 BProgress (1): 866 BProgress (1): 2.3 kBProgress (1): 4.9 kBProgress (1): 6.4 kBProgress (1): 7.6 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.5.1/maven-jar-plugin-3.5.1.pom (7.6 kB at 14 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/49/maven-plugins-49.pom
+Progress (1): 812 BProgress (1): 890 BProgress (1): 2.5 kBProgress (1): 5.0 kBProgress (1): 7.2 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/49/maven-plugins-49.pom (7.2 kB at 147 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/49/maven-parent-49.pom
+Progress (1): 716 BProgress (1): 780 BProgress (1): 2.0 kBProgress (1): 5.9 kBProgress (1): 8.7 kBProgress (1): 13 kB Progress (1): 18 kBProgress (1): 21 kBProgress (1): 26 kBProgress (1): 27 kBProgress (1): 28 kBProgress (1): 33 kBProgress (1): 36 kBProgress (1): 38 kBProgress (1): 40 kBProgress (1): 44 kBProgress (1): 46 kBProgress (1): 50 kBProgress (1): 51 kB                   Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/49/maven-parent-49.pom (51 kB at 1.1 MB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom
+Progress (1): 733 BProgress (1): 809 BProgress (1): 2.2 kBProgress (1): 4.1 kBProgress (1): 5.3 kBProgress (1): 8.9 kBProgress (1): 14 kB Progress (1): 17 kBProgress (1): 20 kBProgress (1): 23 kBProgress (1): 25 kBProgress (1): 27 kB                   Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom (27 kB at 342 kB/s)
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ spring-petclinic-rest ---
+[INFO] Deleting C:\LocalSpace\Repos\spring-petclinic-rest\target
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-java) @ spring-petclinic-rest ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (enforce-maven) @ spring-petclinic-rest ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-agent) @ spring-petclinic-rest ---
+[INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[INFO] argLine set to -javaagent:C:\\Users\\avishkar_rajendran\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.15\\org.jacoco.agent-0.8.15-runtime.jar=destfile=C:\\LocalSpace\\Repos\\spring-petclinic-rest\\target\\jacoco.exec,excludes=**/org/springframework/samples/petclinic/rest/dto/**:**/org/springframework/samples/petclinic/rest/api/**
+[INFO] 
+[INFO] --- openapi-generator:7.25.0:generate (default) @ spring-petclinic-rest ---
+[INFO] Generating with dryRun=false
+[INFO] Output directory (C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi) does not exist, or is inaccessible. No file (.openapi-generator-ignore) will be evaluated.
+[INFO] OpenAPI Generator: spring (server)
+[INFO] Generator 'spring' is considered stable.
+[INFO] ----------------------------------
+[INFO] Environment variable JAVA_POST_PROCESS_FILE not defined so the Java code may not be properly formatted. To define it, try 'export JAVA_POST_PROCESS_FILE="/usr/local/bin/clang-format -i"' (Linux/Mac)
+[INFO] NOTE: To enable file post-processing, 'enablePostProcessFile' must be set to `true` (--enable-post-process-file for CLI).
+[INFO] Invoker Package Name, originally not set, is now derived from api package name: org.springframework.samples.petclinic.rest
+[INFO] Defaulting includeHttpRequestContext to 'false' for blocking
+[WARNING] 'generateJsonIncludeAnnotations' is not set. Defaulting to false: no @JsonInclude annotations are generated and property inclusion is governed entirely by the global ObjectMapper (7.23.0-equivalent output). Set 'generateJsonIncludeAnnotations=false' to keep this behavior and silence this warning, or 'generateJsonIncludeAnnotations=true' to emit spec-honest @JsonInclude annotations (see 'optionalNonNullPropertyJsonInclude'). Note: before 7.24.0 released output had no field-level @JsonInclude, so leaving this unset preserves that behavior.
+[WARNING] 'generateJsonSetterNullsAnnotations' is not set. Defaulting to false: no @JsonSetter(nulls = ...) annotations are generated and deserialization null-handling is governed entirely by the global ObjectMapper (7.23.0-equivalent output). Set 'generateJsonSetterNullsAnnotations=false' to keep this behavior and silence this warning, or 'generateJsonSetterNullsAnnotations=true' to emit @JsonSetter(nulls = ...) on optional non-nullable fields.
+[INFO] Processing operation failingRequest
+[INFO] Processing operation listOwners
+[INFO] Processing operation addOwner
+[INFO] Processing operation listOwnersPage
+[INFO] Processing operation getOwner
+[INFO] Processing operation updateOwner
+[INFO] Processing operation deleteOwner
+[INFO] Processing operation addPetToOwner
+[INFO] Processing operation getOwnersPet
+[INFO] Processing operation updateOwnersPet
+[INFO] Processing operation addVisitToOwner
+[INFO] Processing operation listPetTypes
+[INFO] Processing operation addPetType
+[INFO] Processing operation getPetType
+[INFO] Processing operation updatePetType
+[INFO] Processing operation deletePetType
+[INFO] Processing operation listPets
+[INFO] Processing operation listPetsPage
+[INFO] Processing operation getPet
+[INFO] Processing operation updatePet
+[INFO] Processing operation deletePet
+[INFO] Processing operation listVisits
+[INFO] Processing operation addVisit
+[INFO] Processing operation getVisit
+[INFO] Processing operation updateVisit
+[INFO] Processing operation deleteVisit
+[INFO] Processing operation listSpecialties
+[INFO] Processing operation addSpecialty
+[INFO] Processing operation getSpecialty
+[INFO] Processing operation updateSpecialty
+[INFO] Processing operation deleteSpecialty
+[INFO] Processing operation listVets
+[INFO] Processing operation addVet
+[INFO] Processing operation getVet
+[INFO] Processing operation updateVet
+[INFO] Processing operation deleteVet
+[INFO] Processing operation addUser
+[INFO] Model Pet not generated due to schema mapping
+[INFO] Model Visit not generated due to schema mapping
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\OwnerDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\OwnerFieldsDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\OwnerPageDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\PetFieldsDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\PetPageDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\PetTypeDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\PetTypeFieldsDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\ProblemDetailDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\RoleDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\SpecialtyDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\UserDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\ValidationMessageDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\VetDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\VetFieldsDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\dto\VisitFieldsDto.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\OopsApi.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\OwnerV2Api.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\OwnersApi.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\PetV2Api.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\PetsApi.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\PettypesApi.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\SpecialtiesApi.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\UsersApi.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\VetsApi.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\VisitsApi.java
+[INFO] Skipping generation of Webhooks.
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\pom.xml
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\README.md
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java\org\springframework\samples\petclinic\rest\api\ApiUtil.java
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\.openapi-generator-ignore
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\.openapi-generator\VERSION
+[INFO] writing file C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\.openapi-generator\FILES
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+[INFO] 
+[INFO] --- build-helper:3.6.1:add-source (add-source) @ spring-petclinic-rest ---
+[INFO] Source directory: C:\LocalSpace\Repos\spring-petclinic-rest\target\generated-sources\openapi\src\main\java added.
+[INFO] 
+[INFO] --- spring-boot:4.1.1:build-info (default) @ spring-petclinic-rest ---
+[INFO] Loaded 50 auto-discovered prefixes for remote repository ow2-snapshot (prefixes-ow2-snapshot.txt)
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ spring-petclinic-rest ---
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 15 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ spring-petclinic-rest ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 115 source files with javac [debug parameters release 21] to target\classes
+[INFO] /C:/LocalSpace/Repos/spring-petclinic-rest/src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaPetRepositoryImpl.java: C:\LocalSpace\Repos\spring-petclinic-rest\src\main\java\org\springframework\samples\petclinic\repository\jpa\JpaPetRepositoryImpl.java uses unchecked or unsafe operations.
+[INFO] /C:/LocalSpace/Repos/spring-petclinic-rest/src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaPetRepositoryImpl.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ spring-petclinic-rest ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ spring-petclinic-rest ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 26 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ spring-petclinic-rest ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.springframework.samples.petclinic.mapper.PetMapperTests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.mapper.PetMapperTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  PetMapperTests - Starting PetMapperTests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG PetMapperTests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  PetMapperTests - The following 2 profiles are active: "hsqldb", "spring-data-jpa"
+INFO  Version - HV000001: Hibernate Validator 9.1.3.Final
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 216 ms. Found 7 JPA repository interfaces.
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\avishkar_rajendran\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.11\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+INFO  HikariDataSource - HikariPool-1 - Starting...
+INFO  PoolBase - HikariPool-1 - Driver does not support get/set network timeout for connections. (feature not supported)
+INFO  HikariPool - HikariPool-1 - Added connection org.hsqldb.jdbc.JDBCConnection@6e3f108c
+INFO  HikariDataSource - HikariPool-1 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  core - HHH000001: Hibernate ORM core version 7.4.5.Final
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:hsqldb:mem:petclinic]
+	Database driver: HSQL Database Engine Driver
+	Database dialect: HSQLDialect
+	Database version: 2.7.3
+	Default catalog/schema: PUBLIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+INFO  QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 3459f070-f46b-4e29-86c8-c5cbce69bafd
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  PetMapperTests - Started PetMapperTests in 19.022 seconds (process running for 23.267)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.21 s -- in org.springframework.samples.petclinic.mapper.PetMapperTests
+[INFO] Running org.springframework.samples.petclinic.mapper.VisitMapperTests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.mapper.VisitMapperTests
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s -- in org.springframework.samples.petclinic.mapper.VisitMapperTests
+[INFO] Running org.springframework.samples.petclinic.model.ValidatorTests
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.123 s -- in org.springframework.samples.petclinic.model.ValidatorTests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.OwnerRestControllerV1Tests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.OwnerRestControllerV1Tests
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+ERROR ExceptionControllerAdvice - Unexpected error at POST /api/owners/1/pets
+java.lang.IllegalStateException: JDBC timeout while executing insert into pets
+	at org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1.addPetToOwner(OwnerRestControllerV1.java:151)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:172)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.proceed(AuthorizationManagerBeforeMethodInterceptor.java:271)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:266)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:197)
+	at org.springframework.security.config.annotation.method.configuration.DeferringMethodInterceptor.invoke(DeferringMethodInterceptor.java:44)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1$$SpringCGLIB$$0.addPetToOwner(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:199)
+	at org.springframework.samples.petclinic.rest.controller.OwnerRestControllerV1Tests.testCreatePetWithUnexpectedErrorShouldReturnInternalServerErrorWithGenericDetail(OwnerRestControllerV1Tests.java:461)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:57)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:56)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:125)
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.executeWithCancellationToken(LauncherAdapter.java:68)
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.execute(LauncherAdapter.java:54)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:203)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:168)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:136)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/owners/1/pets
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Accept:"application/json", Content-Length:"106"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1
+           Method = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1#addPetToOwner(Integer, PetFieldsDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = java.lang.IllegalStateException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 500
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/problem+json"]
+     Content type = application/problem+json
+             Body = {"detail":"An unexpected error occurred while processing your request","instance":"/api/owners/1/pets","status":500,"title":"IllegalStateException","type":"http://localhost/api/owners/1/pets","timestamp":"2026-10-28T10:00:03.524623900Z","schemaValidationErrors":[]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+--> newPetAsJSON={"name":"Rosy","birthDate":"2026-10-28","type":{"name":"dog","id":2},"id":999,"ownerId":null,"visits":[]}
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at PUT /api/owners/1: [Field error in object 'ownerFieldsDto' on field 'firstName': rejected value []; codes [Pattern.ownerFieldsDto.firstName,Pattern.firstName,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [ownerFieldsDto.firstName,firstName]; arguments []; default message [firstName],[Ljakarta.validation.constraints.Pattern$Flag;@56522f4d,^[\p{L}]+([ '-][\p{L}]+){0,2}$]; default message [must match "^[\p{L}]+([ '-][\p{L}]+){0,2}$"], Field error in object 'ownerFieldsDto' on field 'firstName': rejected value []; codes [Size.ownerFieldsDto.firstName,Size.firstName,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [ownerFieldsDto.firstName,firstName]; arguments []; default message [firstName],30,1]; default message [size must be between 1 and 30]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/owners/1/pets: [Field error in object 'petFieldsDto' on field 'type.name': rejected value []; codes [Size.petFieldsDto.type.name,Size.type.name,Size.name,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [petFieldsDto.type.name,type.name]; arguments []; default message [type.name],80,1]; default message [size must be between 1 and 80]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/owners/1/pets
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Accept:"application/json", Content-Length:"103"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1
+           Method = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1#addPetToOwner(Integer, PetFieldsDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.bind.MethodArgumentNotValidException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/problem+json"]
+     Content type = application/problem+json
+             Body = {"detail":"The request contains invalid or missing parameters","instance":"/api/owners/1/pets","status":400,"title":"MethodArgumentNotValidException","type":"http://localhost/api/owners/1/pets","timestamp":"2026-10-28T10:00:04.063508300Z","schemaValidationErrors":[{"message":"Field 'type.name' size must be between 1 and 80 (rejected value: )","field":"type.name","defaultMessage":"size must be between 1 and 80","rejectedValue":""}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/owners/1/pets: [Field error in object 'petFieldsDto' on field 'type': rejected value [null]; codes [NotNull.petFieldsDto.type,NotNull.type,NotNull.org.springframework.samples.petclinic.rest.dto.PetTypeDto,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [petFieldsDto.type,type]; arguments []; default message [type]]; default message [must not be null]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/owners/1/pets
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Accept:"application/json", Content-Length:"52"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1
+           Method = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1#addPetToOwner(Integer, PetFieldsDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.bind.MethodArgumentNotValidException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/problem+json"]
+     Content type = application/problem+json
+             Body = {"detail":"The request contains invalid or missing parameters","instance":"/api/owners/1/pets","status":400,"title":"MethodArgumentNotValidException","type":"http://localhost/api/owners/1/pets","timestamp":"2026-10-28T10:00:04.189821400Z","schemaValidationErrors":[{"message":"Field 'type' must not be null (rejected value: null)","field":"type","defaultMessage":"must not be null","rejectedValue":"null"}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+ERROR ExceptionControllerAdvice - Unexpected error at POST /api/owners
+java.lang.RuntimeException: Low-level persistence exception details
+	at org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1.addOwner(OwnerRestControllerV1.java:104)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:172)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.proceed(AuthorizationManagerBeforeMethodInterceptor.java:271)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:266)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:197)
+	at org.springframework.security.config.annotation.method.configuration.DeferringMethodInterceptor.invoke(DeferringMethodInterceptor.java:44)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1$$SpringCGLIB$$0.addOwner(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:199)
+	at org.springframework.samples.petclinic.rest.controller.OwnerRestControllerV1Tests.testCreateOwnerWithUnexpectedErrorShouldReturnInternalServerErrorWithGenericDetail(OwnerRestControllerV1Tests.java:479)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:57)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:56)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:125)
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.executeWithCancellationToken(LauncherAdapter.java:68)
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.execute(LauncherAdapter.java:54)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:203)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:168)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:136)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/owners
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Accept:"application/json", Content-Length:"300"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1
+           Method = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1#addOwner(OwnerFieldsDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = java.lang.RuntimeException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 500
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/problem+json"]
+     Content type = application/problem+json
+             Body = {"detail":"An unexpected error occurred while processing your request","instance":"/api/owners","status":500,"title":"RuntimeException","type":"http://localhost/api/owners","timestamp":"2026-10-28T10:00:04.241189400Z","schemaValidationErrors":[]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  ExceptionControllerAdvice - Data integrity violation at POST /api/owners/1/pets: could not execute statement; SQL [insert into pets ...]; constraint [fk_pet_owner]
+DEBUG ExceptionControllerAdvice - Data integrity violation stacktrace
+org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [insert into pets ...]; constraint [fk_pet_owner]
+	at org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1.addPetToOwner(OwnerRestControllerV1.java:151)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:172)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.proceed(AuthorizationManagerBeforeMethodInterceptor.java:271)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:266)
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:197)
+	at org.springframework.security.config.annotation.method.configuration.DeferringMethodInterceptor.invoke(DeferringMethodInterceptor.java:44)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1$$SpringCGLIB$$0.addPetToOwner(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:199)
+	at org.springframework.samples.petclinic.rest.controller.OwnerRestControllerV1Tests.testCreatePetShouldNotExposeTechnicalDetails(OwnerRestControllerV1Tests.java:368)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:57)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:56)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:125)
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.executeWithCancellationToken(LauncherAdapter.java:68)
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.execute(LauncherAdapter.java:54)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:203)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:168)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:136)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/owners/1/pets
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Accept:"application/json", Content-Length:"106"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1
+           Method = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1#addPetToOwner(Integer, PetFieldsDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.dao.DataIntegrityViolationException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/problem+json"]
+     Content type = application/problem+json
+             Body = {"detail":"The requested resource could not be processed due to a data constraint violation","instance":"/api/owners/1/pets","status":404,"title":"DataIntegrityViolationException","type":"http://localhost/api/owners/1/pets","timestamp":"2026-10-28T10:00:04.299325500Z","schemaValidationErrors":[]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/owners/1/pets: [Field error in object 'petFieldsDto' on field 'name': rejected value [null]; codes [NotNull.petFieldsDto.name,NotNull.name,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [petFieldsDto.name,name]; arguments []; default message [name]]; default message [must not be null]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/owners/1/pets
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Accept:"application/json", Content-Length:"67"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1
+           Method = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1#addPetToOwner(Integer, PetFieldsDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.bind.MethodArgumentNotValidException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/problem+json"]
+     Content type = application/problem+json
+             Body = {"detail":"The request contains invalid or missing parameters","instance":"/api/owners/1/pets","status":400,"title":"MethodArgumentNotValidException","type":"http://localhost/api/owners/1/pets","timestamp":"2026-10-28T10:00:04.433600Z","schemaValidationErrors":[{"message":"Field 'name' must not be null (rejected value: null)","field":"name","defaultMessage":"must not be null","rejectedValue":"null"}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 2 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+newVisitAsJSON {"date":"2026-10-28","description":"rabies shot","id":999,"pet":{"birthDate":null,"id":4,"name":null,"owner":null,"type":null,"visits":[]}}
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/owners: [Field error in object 'ownerFieldsDto' on field 'firstName': rejected value [null]; codes [NotNull.ownerFieldsDto.firstName,NotNull.firstName,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [ownerFieldsDto.firstName,firstName]; arguments []; default message [firstName]]; default message [must not be null]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/owners/1/pets: [Field error in object 'petFieldsDto' on field 'type.id': rejected value [null]; codes [NotNull.petFieldsDto.type.id,NotNull.type.id,NotNull.id,NotNull.java.lang.Integer,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [petFieldsDto.type.id,type.id]; arguments []; default message [type.id]]; default message [must not be null]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/owners/1/pets
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Accept:"application/json", Content-Length:"109"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1
+           Method = org.springframework.samples.petclinic.rest.controller.v1.OwnerRestControllerV1#addPetToOwner(Integer, PetFieldsDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.bind.MethodArgumentNotValidException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/problem+json"]
+     Content type = application/problem+json
+             Body = {"detail":"The request contains invalid or missing parameters","instance":"/api/owners/1/pets","status":400,"title":"MethodArgumentNotValidException","type":"http://localhost/api/owners/1/pets","timestamp":"2026-10-28T10:00:04.907724800Z","schemaValidationErrors":[{"message":"Field 'type.id' must not be null (rejected value: null)","field":"type.id","defaultMessage":"must not be null","rejectedValue":"null"}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.414 s -- in org.springframework.samples.petclinic.rest.controller.OwnerRestControllerV1Tests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.PetRestControllerV1Tests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.PetRestControllerV1Tests
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at PUT /api/pets/3: [Field error in object 'petDto' on field 'birthDate': rejected value [2027-10-28]; codes [PetAgeValidation.petDto.birthDate,PetAgeValidation.birthDate,PetAgeValidation.java.time.LocalDate,PetAgeValidation]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [petDto.birthDate,birthDate]; arguments []; default message [birthDate]]; default message [Birth date cannot be in the future]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  ExceptionControllerAdvice - Unreadable request body at PUT /api/pets/3: JSON parse error: Cannot construct instance of `org.springframework.samples.petclinic.rest.model.PetDto`, problem: name must not be null and must be at most 30 characters
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  ExceptionControllerAdvice - Unreadable request body at PUT /api/pets/3: JSON parse error: Cannot construct instance of `org.springframework.samples.petclinic.rest.model.PetDto`, problem: name must not be null and must be at most 30 characters
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  ExceptionControllerAdvice - Unreadable request body at PUT /api/pets/3: JSON parse error: Cannot construct instance of `org.springframework.samples.petclinic.rest.model.PetDto`, problem: name must not be null and must be at most 30 characters
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.364 s -- in org.springframework.samples.petclinic.rest.controller.PetRestControllerV1Tests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.PetTypeRestControllerV1Tests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.PetTypeRestControllerV1Tests
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at PUT /api/pettypes/1: [Field error in object 'petTypeDto' on field 'name': rejected value []; codes [Size.petTypeDto.name,Size.name,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [petTypeDto.name,name]; arguments []; default message [name],80,1]; default message [size must be between 1 and 80]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/pettypes: [Field error in object 'petTypeFieldsDto' on field 'name': rejected value [null]; codes [NotNull.petTypeFieldsDto.name,NotNull.name,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [petTypeFieldsDto.name,name]; arguments []; default message [name]]; default message [must not be null]]
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.323 s -- in org.springframework.samples.petclinic.rest.controller.PetTypeRestControllerV1Tests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.SpecialtyRestControllerV1Tests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.SpecialtyRestControllerV1Tests
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at PUT /api/specialties/1: [Field error in object 'specialtyDto' on field 'name': rejected value []; codes [Size.specialtyDto.name,Size.name,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [specialtyDto.name,name]; arguments []; default message [name],80,1]; default message [size must be between 1 and 80]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/specialties: [Field error in object 'specialtyDto' on field 'name': rejected value [null]; codes [NotNull.specialtyDto.name,NotNull.name,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [specialtyDto.name,name]; arguments []; default message [name]]; default message [must not be null]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 s -- in org.springframework.samples.petclinic.rest.controller.SpecialtyRestControllerV1Tests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.UserRestControllerV1Tests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.UserRestControllerV1Tests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  UserRestControllerV1Tests - Starting UserRestControllerV1Tests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG UserRestControllerV1Tests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  UserRestControllerV1Tests - The following 2 profiles are active: "hsqldb", "spring-data-jpa"
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 7 JPA repository interfaces.
+INFO  HikariDataSource - HikariPool-2 - Starting...
+INFO  PoolBase - HikariPool-2 - Driver does not support get/set network timeout for connections. (feature not supported)
+INFO  HikariPool - HikariPool-2 - Added connection org.hsqldb.jdbc.JDBCConnection@39f3dbba
+INFO  HikariDataSource - HikariPool-2 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:hsqldb:mem:petclinic]
+	Database driver: HSQL Database Engine Driver
+	Database dialect: HSQLDialect
+	Database version: 2.7.3
+	Default catalog/schema: PUBLIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: bdb4ded1-f9dc-4fb7-917a-32421b41bc5f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  UserRestControllerV1Tests - Started UserRestControllerV1Tests in 1.666 seconds (process running for 28.986)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: UserDto#getRoles()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: UserDto#getRoles()
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/users: [Field error in object 'userDto' on field 'username': rejected value []; codes [Size.userDto.username,Size.username,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDto.username,username]; arguments []; default message [username],80,1]; default message [size must be between 1 and 80]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 2 ms
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: UserDto#getRoles()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: UserDto#getRoles()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: UserDto#getRoles()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: UserDto#getRoles()
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.123 s -- in org.springframework.samples.petclinic.rest.controller.UserRestControllerV1Tests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.V2RestControllersTests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.V2RestControllersTests
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.068 s -- in org.springframework.samples.petclinic.rest.controller.V2RestControllersTests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.VetRestControllerV1Tests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.VetRestControllerV1Tests
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+DEBUG ExceptionControllerAdvice - Validation error at PUT /api/vets/1: [Field error in object 'vetDto' on field 'firstName': rejected value [null]; codes [NotNull.vetDto.firstName,NotNull.firstName,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [vetDto.firstName,firstName]; arguments []; default message [firstName]]; default message [must not be null]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+WARN  CascadingMetaDataBuilder - HV000271: Using `@Valid` on a container (java.util.List) is deprecated. You should apply the annotation on the type argument(s). Affected element: VetDto#getSpecialties()
+DEBUG ExceptionControllerAdvice - Validation error at POST /api/vets: [Field error in object 'vetDto' on field 'firstName': rejected value [null]; codes [NotNull.vetDto.firstName,NotNull.firstName,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [vetDto.firstName,firstName]; arguments []; default message [firstName]]; default message [must not be null]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.301 s -- in org.springframework.samples.petclinic.rest.controller.VetRestControllerV1Tests
+[INFO] Running org.springframework.samples.petclinic.rest.controller.VisitRestControllerV1Tests
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.rest.controller.VisitRestControllerV1Tests
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+WARN  ExceptionControllerAdvice - Unreadable request body at POST /api/visits: JSON parse error: Cannot construct instance of `org.springframework.samples.petclinic.rest.model.VisitDto`, problem: petId must not be null and must be >= 0
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  ExceptionControllerAdvice - Unreadable request body at POST /api/visits: JSON parse error: Cannot construct instance of `org.springframework.samples.petclinic.rest.model.VisitDto`, problem: description must be between 1 and 255 characters
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+WARN  ExceptionControllerAdvice - Unreadable request body at POST /api/visits: JSON parse error: Cannot construct instance of `org.springframework.samples.petclinic.rest.model.VisitDto`, problem: description must be between 1 and 255 characters
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+DEBUG ExceptionControllerAdvice - Validation error at PUT /api/visits/2: [Field error in object 'visitFieldsDto' on field 'description': rejected value [null]; codes [NotNull.visitFieldsDto.description,NotNull.description,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [visitFieldsDto.description,description]; arguments []; default message [description]]; default message [must not be null]]
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 1 ms
+newVisitAsJSON {"date":"2026-10-28","description":"rabies shot","id":999,"petId":8}
+INFO  MockServletContext - Initializing Spring TestDispatcherServlet ''
+INFO  TestDispatcherServlet - Initializing Servlet ''
+INFO  TestDispatcherServlet - Completed initialization in 0 ms
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.322 s -- in org.springframework.samples.petclinic.rest.controller.VisitRestControllerV1Tests
+[INFO] Running org.springframework.samples.petclinic.rest.model.PetDtoTests
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 s -- in org.springframework.samples.petclinic.rest.model.PetDtoTests
+[INFO] Running org.springframework.samples.petclinic.rest.model.VisitDtoTests
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in org.springframework.samples.petclinic.rest.model.VisitDtoTests
+[INFO] Running org.springframework.samples.petclinic.service.clinicService.ClinicServiceH2JdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceH2JdbcTests]: ClinicServiceH2JdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceH2JdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceH2JdbcTests]: ClinicServiceH2JdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.AbstractClinicServiceTests]: AbstractClinicServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceH2JdbcTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  ClinicServiceH2JdbcTests - Starting ClinicServiceH2JdbcTests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG ClinicServiceH2JdbcTests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  ClinicServiceH2JdbcTests - The following 2 profiles are active: "h2", "jdbc"
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 0 JPA repository interfaces.
+INFO  HikariDataSource - HikariPool-3 - Starting...
+INFO  HikariPool - HikariPool-3 - Added connection conn0: url=jdbc:h2:mem:petclinic user=SA
+INFO  HikariDataSource - HikariPool-3 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+WARN  deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:petclinic]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: PETCLINIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists owners alter column first_name set data type varchar(255)
+Hibernate: alter table if exists owners alter column last_name set data type varchar(255)
+Hibernate: alter table if exists owners alter column city set data type varchar(255)
+Hibernate: alter table if exists owners alter column telephone set data type varchar(255)
+Hibernate: alter table if exists pets alter column name set data type varchar(255)
+Hibernate: alter table if exists roles alter column role set data type varchar(255)
+Hibernate: alter table if exists roles alter column username set data type varchar(255)
+Hibernate: alter table if exists specialties alter column name set data type varchar(255)
+Hibernate: alter table if exists types alter column name set data type varchar(255)
+Hibernate: alter table if exists users alter column username set data type varchar(255)
+Hibernate: alter table if exists vets alter column first_name set data type varchar(255)
+Hibernate: alter table if exists vets alter column last_name set data type varchar(255)
+Hibernate: alter table if exists roles drop constraint if exists UKgbujo9d06xbax50ht1lakf6v0
+Hibernate: alter table if exists roles add constraint UKgbujo9d06xbax50ht1lakf6v0 unique (username, role)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 3e1ed684-546b-4c1c-9250-480a3ba7b5ef
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  ClinicServiceH2JdbcTests - Started ClinicServiceH2JdbcTests in 2.985 seconds (process running for 33.263)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.584 s -- in org.springframework.samples.petclinic.service.clinicService.ClinicServiceH2JdbcTests
+[INFO] Running org.springframework.samples.petclinic.service.clinicService.ClinicServiceHsqlJdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceHsqlJdbcTests]: ClinicServiceHsqlJdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceHsqlJdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceHsqlJdbcTests]: ClinicServiceHsqlJdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.AbstractClinicServiceTests]: AbstractClinicServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceHsqlJdbcTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  ClinicServiceHsqlJdbcTests - Starting ClinicServiceHsqlJdbcTests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG ClinicServiceHsqlJdbcTests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  ClinicServiceHsqlJdbcTests - The following 2 profiles are active: "hsqldb", "jdbc"
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
+INFO  HikariDataSource - HikariPool-4 - Starting...
+INFO  PoolBase - HikariPool-4 - Driver does not support get/set network timeout for connections. (feature not supported)
+INFO  HikariPool - HikariPool-4 - Added connection org.hsqldb.jdbc.JDBCConnection@62061f5e
+INFO  HikariDataSource - HikariPool-4 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:hsqldb:mem:petclinic]
+	Database driver: HSQL Database Engine Driver
+	Database dialect: HSQLDialect
+	Database version: 2.7.3
+	Default catalog/schema: PUBLIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: ba4d6d7f-a68d-4bd8-8556-5296f2da5499
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  ClinicServiceHsqlJdbcTests - Started ClinicServiceHsqlJdbcTests in 1.073 seconds (process running for 34.89)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.891 s -- in org.springframework.samples.petclinic.service.clinicService.ClinicServiceHsqlJdbcTests
+[INFO] Running org.springframework.samples.petclinic.service.clinicService.ClinicServiceJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceJpaTests]: ClinicServiceJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceJpaTests]: ClinicServiceJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.AbstractClinicServiceTests]: AbstractClinicServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceJpaTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  ClinicServiceJpaTests - Starting ClinicServiceJpaTests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG ClinicServiceJpaTests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  ClinicServiceJpaTests - The following 2 profiles are active: "jpa", "hsqldb"
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28 ms. Found 0 JPA repository interfaces.
+INFO  HikariDataSource - HikariPool-5 - Starting...
+INFO  PoolBase - HikariPool-5 - Driver does not support get/set network timeout for connections. (feature not supported)
+INFO  HikariPool - HikariPool-5 - Added connection org.hsqldb.jdbc.JDBCConnection@a47133
+INFO  HikariDataSource - HikariPool-5 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:hsqldb:mem:petclinic]
+	Database driver: HSQL Database Engine Driver
+	Database dialect: HSQLDialect
+	Database version: 2.7.3
+	Default catalog/schema: PUBLIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: fa39ac6e-6faf-498d-9ac4-c2c26fd70e92
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  ClinicServiceJpaTests - Started ClinicServiceJpaTests in 1.257 seconds (process running for 36.968)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+WARN  error - HHH000247: ErrorCode: -8, SQLState: 23504
+WARN  error - integrity constraint violation: foreign key no action ; FK_PETS_TYPES table: PETS
+[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.076 s -- in org.springframework.samples.petclinic.service.clinicService.ClinicServiceJpaTests
+[INFO] Running org.springframework.samples.petclinic.service.clinicService.ClinicServiceSpringDataJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceSpringDataJpaTests]: ClinicServiceSpringDataJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceSpringDataJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.ClinicServiceSpringDataJpaTests]: ClinicServiceSpringDataJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.clinicService.AbstractClinicServiceTests]: AbstractClinicServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.clinicService.ClinicServiceSpringDataJpaTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  ClinicServiceSpringDataJpaTests - Starting ClinicServiceSpringDataJpaTests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG ClinicServiceSpringDataJpaTests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  ClinicServiceSpringDataJpaTests - The following 2 profiles are active: "spring-data-jpa", "hsqldb"
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 7 JPA repository interfaces.
+INFO  HikariDataSource - HikariPool-6 - Starting...
+INFO  PoolBase - HikariPool-6 - Driver does not support get/set network timeout for connections. (feature not supported)
+INFO  HikariPool - HikariPool-6 - Added connection org.hsqldb.jdbc.JDBCConnection@6426428c
+INFO  HikariDataSource - HikariPool-6 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:hsqldb:mem:petclinic]
+	Database driver: HSQL Database Engine Driver
+	Database dialect: HSQLDialect
+	Database version: 2.7.3
+	Default catalog/schema: PUBLIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 19221132-5a3a-4af5-a196-077bda5f0c95
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  ClinicServiceSpringDataJpaTests - Started ClinicServiceSpringDataJpaTests in 1.508 seconds (process running for 39.295)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+WARN  error - HHH000247: ErrorCode: -8, SQLState: 23504
+WARN  error - integrity constraint violation: foreign key no action ; FK_PETS_TYPES table: PETS
+[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.920 s -- in org.springframework.samples.petclinic.service.clinicService.ClinicServiceSpringDataJpaTests
+[INFO] Running org.springframework.samples.petclinic.service.userService.UserServiceH2JdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceH2JdbcTests]: UserServiceH2JdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceH2JdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceH2JdbcTests]: UserServiceH2JdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.AbstractUserServiceTests]: AbstractUserServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceH2JdbcTests
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.136 s -- in org.springframework.samples.petclinic.service.userService.UserServiceH2JdbcTests
+[INFO] Running org.springframework.samples.petclinic.service.userService.UserServiceHsqlJdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceHsqlJdbcTests]: UserServiceHsqlJdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceHsqlJdbcTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceHsqlJdbcTests]: UserServiceHsqlJdbcTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.AbstractUserServiceTests]: AbstractUserServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceHsqlJdbcTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  UserServiceHsqlJdbcTests - Starting UserServiceHsqlJdbcTests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG UserServiceHsqlJdbcTests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  UserServiceHsqlJdbcTests - The following 2 profiles are active: "hsqldb", "jdbc"
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 0 JPA repository interfaces.
+INFO  HikariDataSource - HikariPool-7 - Starting...
+INFO  PoolBase - HikariPool-7 - Driver does not support get/set network timeout for connections. (feature not supported)
+INFO  HikariPool - HikariPool-7 - Added connection org.hsqldb.jdbc.JDBCConnection@1e7ead7a
+INFO  HikariDataSource - HikariPool-7 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:hsqldb:mem:petclinic]
+	Database driver: HSQL Database Engine Driver
+	Database dialect: HSQLDialect
+	Database version: 2.7.3
+	Default catalog/schema: PUBLIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d826cc35-2273-465c-af9b-4c2b4707722f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  UserServiceHsqlJdbcTests - Started UserServiceHsqlJdbcTests in 1.842 seconds (process running for 42.704)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.905 s -- in org.springframework.samples.petclinic.service.userService.UserServiceHsqlJdbcTests
+[INFO] Running org.springframework.samples.petclinic.service.userService.UserServiceJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceJpaTests]: UserServiceJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceJpaTests]: UserServiceJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.AbstractUserServiceTests]: AbstractUserServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceJpaTests
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in org.springframework.samples.petclinic.service.userService.UserServiceJpaTests
+[INFO] Running org.springframework.samples.petclinic.service.userService.UserServiceSpringDataJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceSpringDataJpaTests]: UserServiceSpringDataJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceSpringDataJpaTests
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.UserServiceSpringDataJpaTests]: UserServiceSpringDataJpaTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.springframework.samples.petclinic.service.userService.AbstractUserServiceTests]: AbstractUserServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+INFO  SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.service.userService.UserServiceSpringDataJpaTests
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in org.springframework.samples.petclinic.service.userService.UserServiceSpringDataJpaTests
+[INFO] Running org.springframework.samples.petclinic.SpringConfigTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+INFO  SpringConfigTests - Starting SpringConfigTests using Java 25.0.3 with PID 55740 (started by AvishkarRajendran in C:\LocalSpace\Repos\spring-petclinic-rest)
+DEBUG SpringConfigTests - Running with Spring Boot v4.1.1, Spring v7.0.9
+INFO  SpringConfigTests - The following 2 profiles are active: "hsqldb", "spring-data-jpa"
+INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 67 ms. Found 7 JPA repository interfaces.
+INFO  HikariDataSource - HikariPool-8 - Starting...
+INFO  PoolBase - HikariPool-8 - Driver does not support get/set network timeout for connections. (feature not supported)
+INFO  HikariPool - HikariPool-8 - Added connection org.hsqldb.jdbc.JDBCConnection@5162ba6e
+INFO  HikariDataSource - HikariPool-8 - Start completed.
+INFO  jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+INFO  SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:hsqldb:mem:petclinic]
+	Database driver: HSQL Database Engine Driver
+	Database dialect: HSQLDialect
+	Database version: 2.7.3
+	Default catalog/schema: PUBLIC/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+INFO  core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+INFO  LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+WARN  UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d6244bc8-6f62-485b-97a7-d8675c5e126d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+INFO  EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+INFO  SpringConfigTests - Started SpringConfigTests in 1.703 seconds (process running for 44.506)
+WARN  SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+WARN  SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.720 s -- in org.springframework.samples.petclinic.SpringConfigTests
+[INFO] Running org.springframework.validation.PetAgeValidatorTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.626 s -- in org.springframework.validation.PetAgeValidatorTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 274, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ spring-petclinic-rest ---
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.6/maven-archiver-3.6.6.pom
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.12.0/plexus-archiver-4.12.0.pom
+Progress (1): 1.2 kBProgress (1): 1.4 kBProgress (1): 4.5 kBProgress (1): 5.6 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.12.0/plexus-archiver-4.12.0.pom (5.6 kB at 72 kB/s)
+Progress (1): 793 BProgress (1): 879 BProgress (1): 2.4 kBProgress (1): 5.2 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.6/maven-archiver-3.6.6.pom (5.2 kB at 41 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/45/maven-shared-components-45.pom
+Progress (1): 810 BProgress (1): 888 BProgress (1): 2.4 kBProgress (1): 3.8 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-components/45/maven-shared-components-45.pom (3.8 kB at 60 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/45/maven-parent-45.pom
+Progress (1): 804 BProgress (1): 884 BProgress (1): 2.2 kBProgress (1): 3.2 kBProgress (1): 6.7 kBProgress (1): 11 kB Progress (1): 14 kBProgress (1): 19 kBProgress (1): 23 kBProgress (1): 26 kBProgress (1): 28 kBProgress (1): 30 kBProgress (1): 33 kBProgress (1): 37 kBProgress (1): 39 kBProgress (1): 41 kBProgress (1): 44 kBProgress (1): 48 kBProgress (1): 52 kBProgress (1): 53 kB                   Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/45/maven-parent-45.pom (53 kB at 944 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.10.4/plexus-archiver-4.10.4.pom
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.6.0/plexus-io-3.6.0.pom
+Downloading from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.12/xz-1.12.pom
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.pom
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-9/zstd-jni-1.5.7-9.pom
+Progress (1): 1.2 kBProgress (1): 1.4 kBProgress (1): 4.4 kBProgress (1): 5.6 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.10.4/plexus-archiver-4.10.4.pom (5.6 kB at 111 kB/s)
+Progress (1): 1.2 kBProgress (1): 1.3 kBProgress (1): 3.2 kBProgress (1): 3.5 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.6.0/plexus-io-3.6.0.pom (3.5 kB at 55 kB/s)
+Progress (1): 1.1 kBProgress (1): 1.3 kBProgress (2): 1.3 kB | 790 BProgress (2): 1.3 kB | 868 BProgress (2): 2.0 kB | 868 BProgress (2): 2.0 kB | 2.2 kBProgress (2): 2.0 kB | 3.9 kBProgress (2): 2.0 kB | 5.0 kBProgress (2): 2.0 kB | 7.7 kBProgress (2): 2.0 kB | 10 kB Progress (2): 2.0 kB | 13 kBProgress (2): 2.0 kB | 15 kBProgress (2): 2.0 kB | 19 kBProgress (2): 2.0 kB | 23 kBProgress (2): 2.0 kB | 25 kBProgress (2): 2.0 kB | 25 kBProgress (3): 2.0 kB | 25 kB | 1.1 kBProgress (3): 2.0 kB | 25 kB | 1.3 kBProgress (3): 2.0 kB | 25 kB | 1.9 kB                                     Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-9/zstd-jni-1.5.7-9.pom (2.0 kB at 19 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.pom (25 kB at 232 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.12/xz-1.12.pom (1.9 kB at 18 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.pom
+Progress (1): 739 BProgress (1): 819 BProgress (1): 2.0 kBProgress (1): 4.1 kBProgress (1): 5.3 kBProgress (1): 7.7 kBProgress (1): 11 kB Progress (1): 13 kBProgress (1): 15 kBProgress (1): 18 kBProgress (1): 18 kB                   Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.pom (18 kB at 240 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.6/maven-archiver-3.6.6.jar
+Progress (1): 0.6/28 kBProgress (1): 1.9/28 kBProgress (1): 3.3/28 kBProgress (1): 4.7/28 kBProgress (1): 6.0/28 kBProgress (1): 7.4/28 kBProgress (1): 7.7/28 kBProgress (1): 9.1/28 kBProgress (1): 10/28 kB Progress (1): 12/28 kBProgress (1): 13/28 kBProgress (1): 15/28 kBProgress (1): 16/28 kBProgress (1): 17/28 kBProgress (1): 19/28 kBProgress (1): 20/28 kBProgress (1): 21/28 kBProgress (1): 23/28 kBProgress (1): 24/28 kBProgress (1): 25/28 kBProgress (1): 27/28 kBProgress (1): 28/28 kBProgress (1): 28 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.6.6/maven-archiver-3.6.6.jar (28 kB at 359 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.12.0/plexus-archiver-4.12.0.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.6.0/plexus-io-3.6.0.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.12/xz-1.12.jar
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-9/zstd-jni-1.5.7-9.jar
+Progress (1): 0.9/227 kBProgress (1): 2.3/227 kBProgress (1): 3.6/227 kBProgress (1): 5.0/227 kBProgress (1): 6.4/227 kBProgress (1): 7.7/227 kBProgress (1): 9.1/227 kBProgress (1): 10/227 kB Progress (1): 12/227 kBProgress (1): 13/227 kBProgress (1): 15/227 kBProgress (1): 16/227 kBProgress (1): 17/227 kBProgress (1): 19/227 kBProgress (1): 20/227 kBProgress (1): 21/227 kBProgress (2): 21/227 kB | 0.9/80 kBProgress (2): 23/227 kB | 0.9/80 kBProgress (2): 23/227 kB | 2.3/80 kBProgress (2): 23/227 kB | 3.6/80 kBProgress (3): 23/227 kB | 3.6/80 kB | 0.9/169 kBProgress (3): 24/227 kB | 3.6/80 kB | 0.9/169 kBProgress (3): 24/227 kB | 3.6/80 kB | 2.3/169 kBProgress (3): 24/227 kB | 3.6/80 kB | 3.6/169 kBProgress (3): 26/227 kB | 3.6/80 kB | 3.6/169 kBProgress (3): 26/227 kB | 5.0/80 kB | 3.6/169 kBProgress (3): 27/227 kB | 5.0/80 kB | 3.6/169 kBProgress (3): 27/227 kB | 6.4/80 kB | 3.6/169 kBProgress (3): 27/227 kB | 6.4/80 kB | 5.0/169 kBProgress (3): 28/227 kB | 6.4/80 kB | 5.0/169 kBProgress (3): 28/227 kB | 7.7/80 kB | 5.0/169 kBProgress (3): 30/227 kB | 7.7/80 kB | 5.0/169 kBProgress (3): 30/227 kB | 7.7/80 kB | 6.4/169 kBProgress (3): 30/227 kB | 9.1/80 kB | 6.4/169 kBProgress (3): 30/227 kB | 9.1/80 kB | 7.7/169 kBProgress (3): 31/227 kB | 9.1/80 kB | 7.7/169 kBProgress (3): 31/227 kB | 10/80 kB | 7.7/169 kB Progress (3): 32/227 kB | 10/80 kB | 7.7/169 kBProgress (3): 32/227 kB | 10/80 kB | 9.1/169 kBProgress (3): 32/227 kB | 12/80 kB | 9.1/169 kBProgress (3): 34/227 kB | 12/80 kB | 9.1/169 kBProgress (3): 34/227 kB | 13/80 kB | 9.1/169 kBProgress (3): 35/227 kB | 13/80 kB | 9.1/169 kBProgress (3): 36/227 kB | 13/80 kB | 9.1/169 kBProgress (3): 38/227 kB | 13/80 kB | 9.1/169 kBProgress (3): 38/227 kB | 17/80 kB | 9.1/169 kBProgress (3): 39/227 kB | 17/80 kB | 9.1/169 kBProgress (3): 39/227 kB | 17/80 kB | 10/169 kB Progress (3): 39/227 kB | 22/80 kB | 10/169 kBProgress (3): 41/227 kB | 22/80 kB | 10/169 kBProgress (3): 41/227 kB | 22/80 kB | 12/169 kBProgress (3): 42/227 kB | 22/80 kB | 12/169 kBProgress (3): 42/227 kB | 22/80 kB | 13/169 kBProgress (3): 42/227 kB | 26/80 kB | 13/169 kBProgress (3): 42/227 kB | 26/80 kB | 15/169 kBProgress (3): 43/227 kB | 26/80 kB | 15/169 kBProgress (3): 43/227 kB | 30/80 kB | 15/169 kBProgress (3): 45/227 kB | 30/80 kB | 15/169 kBProgress (3): 46/227 kB | 30/80 kB | 15/169 kBProgress (3): 46/227 kB | 30/80 kB | 16/169 kBProgress (3): 46/227 kB | 34/80 kB | 16/169 kBProgress (4): 46/227 kB | 34/80 kB | 16/169 kB | 0/7.6 MBProgress (4): 50/227 kB | 34/80 kB | 16/169 kB | 0/7.6 MBProgress (4): 50/227 kB | 34/80 kB | 16/169 kB | 0/7.6 MBProgress (4): 50/227 kB | 39/80 kB | 16/169 kB | 0/7.6 MBProgress (4): 50/227 kB | 39/80 kB | 17/169 kB | 0/7.6 MBProgress (4): 55/227 kB | 39/80 kB | 17/169 kB | 0/7.6 MBProgress (4): 55/227 kB | 43/80 kB | 17/169 kB | 0/7.6 MBProgress (4): 55/227 kB | 43/80 kB | 19/169 kB | 0/7.6 MBProgress (4): 57/227 kB | 43/80 kB | 19/169 kB | 0/7.6 MBProgress (4): 57/227 kB | 43/80 kB | 20/169 kB | 0/7.6 MBProgress (4): 57/227 kB | 47/80 kB | 20/169 kB | 0/7.6 MBProgress (4): 57/227 kB | 47/80 kB | 20/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 47/80 kB | 20/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 47/80 kB | 21/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 51/80 kB | 21/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 51/80 kB | 21/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 51/80 kB | 23/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 51/80 kB | 23/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 51/80 kB | 24/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 51/80 kB | 24/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 51/80 kB | 25/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 56/80 kB | 25/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 56/80 kB | 27/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 57/80 kB | 27/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 57/80 kB | 28/169 kB | 0/7.6 MBProgress (4): 61/227 kB | 61/80 kB | 28/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 28/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 30/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 30/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 31/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 31/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 32/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 32/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 32/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 34/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 34/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 35/169 kB | 0/7.6 MBProgress (4): 65/227 kB | 61/80 kB | 35/169 kB | 0/7.6 MBProgress (5): 65/227 kB | 61/80 kB | 35/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 36/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 38/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 38/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 39/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 41/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 65/227 kB | 61/80 kB | 41/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 41/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 41/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 41/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 41/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 42/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 42/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 42/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 43/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 43/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 43/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 45/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 45/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 70/227 kB | 61/80 kB | 46/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 74/227 kB | 61/80 kB | 46/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 74/227 kB | 61/80 kB | 46/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 74/227 kB | 61/80 kB | 47/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 78/227 kB | 61/80 kB | 47/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 78/227 kB | 61/80 kB | 49/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 78/227 kB | 61/80 kB | 50/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 78/227 kB | 61/80 kB | 51/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 82/227 kB | 61/80 kB | 51/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 82/227 kB | 61/80 kB | 56/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 82/227 kB | 61/80 kB | 56/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 86/227 kB | 61/80 kB | 56/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 86/227 kB | 61/80 kB | 60/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 91/227 kB | 61/80 kB | 60/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 91/227 kB | 61/80 kB | 60/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 91/227 kB | 61/80 kB | 60/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 95/227 kB | 61/80 kB | 60/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 95/227 kB | 61/80 kB | 60/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 95/227 kB | 61/80 kB | 60/169 kB | 0/7.6 MB | 0/1.1 MBProgress (5): 95/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 95/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 99/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 103/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 108/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 108/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 112/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 112/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 116/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 116/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 116/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 116/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 116/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 120/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 122/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 127/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 131/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0/1.1 MBProgress (5): 131/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 135/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 139/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 139/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 144/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 144/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 148/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 148/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 152/227 kB | 61/80 kB | 60/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 152/227 kB | 61/80 kB | 64/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 152/227 kB | 65/80 kB | 64/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 156/227 kB | 65/80 kB | 64/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 156/227 kB | 65/80 kB | 68/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 160/227 kB | 65/80 kB | 68/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 160/227 kB | 70/80 kB | 68/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 160/227 kB | 70/80 kB | 73/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 165/227 kB | 70/80 kB | 73/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 165/227 kB | 74/80 kB | 73/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 165/227 kB | 74/80 kB | 77/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 165/227 kB | 74/80 kB | 77/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 169/227 kB | 74/80 kB | 77/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 169/227 kB | 78/80 kB | 77/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 169/227 kB | 78/80 kB | 81/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 173/227 kB | 78/80 kB | 81/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 173/227 kB | 80 kB | 81/169 kB | 0.1/7.6 MB | 0.1/1.1 MB   Progress (5): 173/227 kB | 80 kB | 81/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 173/227 kB | 80 kB | 85/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 177/227 kB | 80 kB | 85/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 177/227 kB | 80 kB | 90/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 177/227 kB | 80 kB | 90/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 177/227 kB | 80 kB | 94/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 177/227 kB | 80 kB | 94/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 182/227 kB | 80 kB | 94/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 182/227 kB | 80 kB | 98/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 182/227 kB | 80 kB | 98/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 186/227 kB | 80 kB | 98/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 190/227 kB | 80 kB | 98/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 190/227 kB | 80 kB | 98/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 190/227 kB | 80 kB | 98/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 190/227 kB | 80 kB | 102/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 190/227 kB | 80 kB | 102/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 190/227 kB | 80 kB | 102/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 190/227 kB | 80 kB | 102/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 102/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 102/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 106/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 106/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 111/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 111/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 115/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 119/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 119/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 119/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 122/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 122/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 127/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 131/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 131/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 131/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 135/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 135/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 139/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 139/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 144/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 144/169 kB | 0.1/7.6 MB | 0.1/1.1 MBProgress (5): 194/227 kB | 80 kB | 148/169 kB | 0.1/7.6 MB | 0.1/1.1 MB                                                                       Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.6.0/plexus-io-3.6.0.jar (80 kB at 330 kB/s)
+Progress (4): 194/227 kB | 148/169 kB | 0.2/7.6 MB | 0.1/1.1 MB                                                               Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar
+Progress (4): 194/227 kB | 148/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 152/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 152/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 156/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 160/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 160/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 165/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 165/169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MB    Progress (4): 194/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 194/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 199/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 199/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 203/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 203/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 203/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 207/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 207/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 211/227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MB    Progress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.1/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (4): 227 kB | 169 kB | 0.2/7.6 MB | 0.2/1.1 MB                                                       Downloaded from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.12/xz-1.12.jar (169 kB at 603 kB/s)
+Progress (3): 227 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (3): 227 kB | 0.2/7.6 MB | 0.2/1.1 MBProgress (3): 227 kB | 0.3/7.6 MB | 0.2/1.1 MBProgress (3): 227 kB | 0.3/7.6 MB | 0.2/1.1 MBProgress (3): 227 kB | 0.3/7.6 MB | 0.2/1.1 MBProgress (3): 227 kB | 0.3/7.6 MB | 0.2/1.1 MBProgress (3): 227 kB | 0.3/7.6 MB | 0.2/1.1 MB                                              Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.12.0/plexus-archiver-4.12.0.jar (227 kB at 782 kB/s)
+Progress (3): 0.3/7.6 MB | 0.2/1.1 MB | 3.8/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 3.8/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 3.8/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 4.1/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 8.3/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 8.3/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 13/375 kB Progress (3): 0.3/7.6 MB | 0.2/1.1 MB | 13/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 17/375 kBProgress (3): 0.3/7.6 MB | 0.2/1.1 MB | 21/375 kBProgress (3): 0.4/7.6 MB | 0.2/1.1 MB | 21/375 kBProgress (3): 0.4/7.6 MB | 0.2/1.1 MB | 21/375 kBProgress (3): 0.4/7.6 MB | 0.2/1.1 MB | 25/375 kBProgress (3): 0.4/7.6 MB | 0.2/1.1 MB | 25/375 kBProgress (3): 0.4/7.6 MB | 0.2/1.1 MB | 29/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 29/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 33/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 37/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 41/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 41/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 41/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 46/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 50/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 50/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 50/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 50/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 67/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 67/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 67/375 kBProgress (3): 0.4/7.6 MB | 0.3/1.1 MB | 67/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 67/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 67/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 83/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 83/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 87/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 87/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 94/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 94/375 kBProgress (3): 0.5/7.6 MB | 0.3/1.1 MB | 111/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 111/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.4/1.1 MB | 127/375 kBProgress (3): 0.5/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 127/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 143/375 kBProgress (3): 0.6/7.6 MB | 0.5/1.1 MB | 143/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 143/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 143/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 143/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 160/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 160/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 176/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 193/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 193/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 193/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 205/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 209/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 209/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 209/375 kBProgress (3): 0.7/7.6 MB | 0.5/1.1 MB | 209/375 kBProgress (3): 0.8/7.6 MB | 0.5/1.1 MB | 209/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 209/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 209/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 209/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 209/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 225/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 242/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 258/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 274/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 291/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 307/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 324/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 336/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 352/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 369/375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kB    Progress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kBProgress (3): 0.8/7.6 MB | 0.6/1.1 MB | 375 kBProgress (3): 0.8/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 0.9/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.7/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.0/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.8/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.1/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.2/7.6 MB | 0.9/1.1 MB | 375 kBProgress (3): 1.2/7.6 MB | 1.0/1.1 MB | 375 kB                                              Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar (375 kB at 986 kB/s)
+Progress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.2/7.6 MB | 1.0/1.1 MBProgress (2): 1.3/7.6 MB | 1.0/1.1 MBProgress (2): 1.3/7.6 MB | 1.1/1.1 MBProgress (2): 1.3/7.6 MB | 1.1/1.1 MBProgress (2): 1.3/7.6 MB | 1.1/1.1 MBProgress (2): 1.3/7.6 MB | 1.1/1.1 MBProgress (2): 1.3/7.6 MB | 1.1/1.1 MBProgress (2): 1.3/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1/1.1 MBProgress (2): 1.4/7.6 MB | 1.1 MB    Progress (2): 1.4/7.6 MB | 1.1 MBProgress (2): 1.5/7.6 MB | 1.1 MBProgress (2): 1.5/7.6 MB | 1.1 MBProgress (2): 1.5/7.6 MB | 1.1 MBProgress (2): 1.5/7.6 MB | 1.1 MBProgress (2): 1.5/7.6 MB | 1.1 MBProgress (2): 1.5/7.6 MB | 1.1 MBProgress (2): 1.5/7.6 MB | 1.1 MBProgress (2): 1.6/7.6 MB | 1.1 MBProgress (2): 1.6/7.6 MB | 1.1 MBProgress (2): 1.6/7.6 MB | 1.1 MBProgress (2): 1.6/7.6 MB | 1.1 MBProgress (2): 1.6/7.6 MB | 1.1 MBProgress (2): 1.6/7.6 MB | 1.1 MBProgress (2): 1.7/7.6 MB | 1.1 MBProgress (2): 1.7/7.6 MB | 1.1 MBProgress (2): 1.7/7.6 MB | 1.1 MBProgress (2): 1.7/7.6 MB | 1.1 MBProgress (2): 1.7/7.6 MB | 1.1 MBProgress (2): 1.7/7.6 MB | 1.1 MBProgress (2): 1.8/7.6 MB | 1.1 MBProgress (2): 1.8/7.6 MB | 1.1 MBProgress (2): 1.8/7.6 MB | 1.1 MBProgress (2): 1.8/7.6 MB | 1.1 MBProgress (2): 1.8/7.6 MB | 1.1 MBProgress (2): 1.8/7.6 MB | 1.1 MBProgress (2): 1.9/7.6 MB | 1.1 MB                                 Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar (1.1 MB at 2.5 MB/s)
+Progress (1): 1.9/7.6 MBProgress (1): 1.9/7.6 MBProgress (1): 1.9/7.6 MBProgress (1): 1.9/7.6 MBProgress (1): 1.9/7.6 MBProgress (1): 2.0/7.6 MBProgress (1): 2.0/7.6 MBProgress (1): 2.0/7.6 MBProgress (1): 2.0/7.6 MBProgress (1): 2.0/7.6 MBProgress (1): 2.0/7.6 MBProgress (1): 2.1/7.6 MBProgress (1): 2.1/7.6 MBProgress (1): 2.1/7.6 MBProgress (1): 2.1/7.6 MBProgress (1): 2.1/7.6 MBProgress (1): 2.1/7.6 MBProgress (1): 2.2/7.6 MBProgress (1): 2.2/7.6 MBProgress (1): 2.2/7.6 MBProgress (1): 2.2/7.6 MBProgress (1): 2.2/7.6 MBProgress (1): 2.2/7.6 MBProgress (1): 2.2/7.6 MBProgress (1): 2.3/7.6 MBProgress (1): 2.3/7.6 MBProgress (1): 2.3/7.6 MBProgress (1): 2.3/7.6 MBProgress (1): 2.3/7.6 MBProgress (1): 2.3/7.6 MBProgress (1): 2.4/7.6 MBProgress (1): 2.4/7.6 MBProgress (1): 2.4/7.6 MBProgress (1): 2.4/7.6 MBProgress (1): 2.4/7.6 MBProgress (1): 2.4/7.6 MBProgress (1): 2.5/7.6 MBProgress (1): 2.5/7.6 MBProgress (1): 2.5/7.6 MBProgress (1): 2.5/7.6 MBProgress (1): 2.5/7.6 MBProgress (1): 2.5/7.6 MBProgress (1): 2.6/7.6 MBProgress (1): 2.6/7.6 MBProgress (1): 2.6/7.6 MBProgress (1): 2.6/7.6 MBProgress (1): 2.6/7.6 MBProgress (1): 2.6/7.6 MBProgress (1): 2.7/7.6 MBProgress (1): 2.7/7.6 MBProgress (1): 2.7/7.6 MBProgress (1): 2.7/7.6 MBProgress (1): 2.7/7.6 MBProgress (1): 2.7/7.6 MBProgress (1): 2.8/7.6 MBProgress (1): 2.8/7.6 MBProgress (1): 2.8/7.6 MBProgress (1): 2.8/7.6 MBProgress (1): 2.8/7.6 MBProgress (1): 2.8/7.6 MBProgress (1): 2.9/7.6 MBProgress (1): 2.9/7.6 MBProgress (1): 2.9/7.6 MBProgress (1): 2.9/7.6 MBProgress (1): 2.9/7.6 MBProgress (1): 2.9/7.6 MBProgress (1): 2.9/7.6 MBProgress (1): 3.0/7.6 MBProgress (1): 3.0/7.6 MBProgress (1): 3.0/7.6 MBProgress (1): 3.0/7.6 MBProgress (1): 3.0/7.6 MBProgress (1): 3.0/7.6 MBProgress (1): 3.0/7.6 MBProgress (1): 3.1/7.6 MBProgress (1): 3.1/7.6 MBProgress (1): 3.1/7.6 MBProgress (1): 3.1/7.6 MBProgress (1): 3.1/7.6 MBProgress (1): 3.1/7.6 MBProgress (1): 3.2/7.6 MBProgress (1): 3.2/7.6 MBProgress (1): 3.2/7.6 MBProgress (1): 3.2/7.6 MBProgress (1): 3.2/7.6 MBProgress (1): 3.2/7.6 MBProgress (1): 3.3/7.6 MBProgress (1): 3.3/7.6 MBProgress (1): 3.3/7.6 MBProgress (1): 3.3/7.6 MBProgress (1): 3.3/7.6 MBProgress (1): 3.3/7.6 MBProgress (1): 3.4/7.6 MBProgress (1): 3.4/7.6 MBProgress (1): 3.4/7.6 MBProgress (1): 3.4/7.6 MBProgress (1): 3.4/7.6 MBProgress (1): 3.4/7.6 MBProgress (1): 3.5/7.6 MBProgress (1): 3.5/7.6 MBProgress (1): 3.5/7.6 MBProgress (1): 3.5/7.6 MBProgress (1): 3.5/7.6 MBProgress (1): 3.5/7.6 MBProgress (1): 3.6/7.6 MBProgress (1): 3.6/7.6 MBProgress (1): 3.6/7.6 MBProgress (1): 3.6/7.6 MBProgress (1): 3.6/7.6 MBProgress (1): 3.6/7.6 MBProgress (1): 3.7/7.6 MBProgress (1): 3.7/7.6 MBProgress (1): 3.7/7.6 MBProgress (1): 3.7/7.6 MBProgress (1): 3.7/7.6 MBProgress (1): 3.7/7.6 MBProgress (1): 3.8/7.6 MBProgress (1): 3.8/7.6 MBProgress (1): 3.8/7.6 MBProgress (1): 3.8/7.6 MBProgress (1): 3.8/7.6 MBProgress (1): 3.8/7.6 MBProgress (1): 3.8/7.6 MBProgress (1): 3.9/7.6 MBProgress (1): 3.9/7.6 MBProgress (1): 3.9/7.6 MBProgress (1): 3.9/7.6 MBProgress (1): 3.9/7.6 MBProgress (1): 3.9/7.6 MBProgress (1): 4.0/7.6 MBProgress (1): 4.0/7.6 MBProgress (1): 4.0/7.6 MBProgress (1): 4.0/7.6 MBProgress (1): 4.0/7.6 MBProgress (1): 4.0/7.6 MBProgress (1): 4.1/7.6 MBProgress (1): 4.1/7.6 MBProgress (1): 4.1/7.6 MBProgress (1): 4.1/7.6 MBProgress (1): 4.1/7.6 MBProgress (1): 4.1/7.6 MBProgress (1): 4.2/7.6 MBProgress (1): 4.2/7.6 MBProgress (1): 4.2/7.6 MBProgress (1): 4.2/7.6 MBProgress (1): 4.2/7.6 MBProgress (1): 4.2/7.6 MBProgress (1): 4.3/7.6 MBProgress (1): 4.3/7.6 MBProgress (1): 4.3/7.6 MBProgress (1): 4.3/7.6 MBProgress (1): 4.3/7.6 MBProgress (1): 4.3/7.6 MBProgress (1): 4.3/7.6 MBProgress (1): 4.4/7.6 MBProgress (1): 4.4/7.6 MBProgress (1): 4.4/7.6 MBProgress (1): 4.4/7.6 MBProgress (1): 4.4/7.6 MBProgress (1): 4.4/7.6 MBProgress (1): 4.5/7.6 MBProgress (1): 4.5/7.6 MBProgress (1): 4.5/7.6 MBProgress (1): 4.5/7.6 MBProgress (1): 4.5/7.6 MBProgress (1): 4.5/7.6 MBProgress (1): 4.6/7.6 MBProgress (1): 4.6/7.6 MBProgress (1): 4.6/7.6 MBProgress (1): 4.6/7.6 MBProgress (1): 4.6/7.6 MBProgress (1): 4.6/7.6 MBProgress (1): 4.7/7.6 MBProgress (1): 4.7/7.6 MBProgress (1): 4.7/7.6 MBProgress (1): 4.7/7.6 MBProgress (1): 4.7/7.6 MBProgress (1): 4.7/7.6 MBProgress (1): 4.7/7.6 MBProgress (1): 4.8/7.6 MBProgress (1): 4.8/7.6 MBProgress (1): 4.8/7.6 MBProgress (1): 4.8/7.6 MBProgress (1): 4.8/7.6 MBProgress (1): 4.8/7.6 MBProgress (1): 4.9/7.6 MBProgress (1): 4.9/7.6 MBProgress (1): 4.9/7.6 MBProgress (1): 4.9/7.6 MBProgress (1): 4.9/7.6 MBProgress (1): 4.9/7.6 MBProgress (1): 5.0/7.6 MBProgress (1): 5.0/7.6 MBProgress (1): 5.0/7.6 MBProgress (1): 5.0/7.6 MBProgress (1): 5.0/7.6 MBProgress (1): 5.0/7.6 MBProgress (1): 5.1/7.6 MBProgress (1): 5.1/7.6 MBProgress (1): 5.1/7.6 MBProgress (1): 5.1/7.6 MBProgress (1): 5.1/7.6 MBProgress (1): 5.1/7.6 MBProgress (1): 5.2/7.6 MBProgress (1): 5.2/7.6 MBProgress (1): 5.2/7.6 MBProgress (1): 5.2/7.6 MBProgress (1): 5.2/7.6 MBProgress (1): 5.2/7.6 MBProgress (1): 5.3/7.6 MBProgress (1): 5.3/7.6 MBProgress (1): 5.3/7.6 MBProgress (1): 5.3/7.6 MBProgress (1): 5.3/7.6 MBProgress (1): 5.3/7.6 MBProgress (1): 5.4/7.6 MBProgress (1): 5.4/7.6 MBProgress (1): 5.4/7.6 MBProgress (1): 5.4/7.6 MBProgress (1): 5.4/7.6 MBProgress (1): 5.4/7.6 MBProgress (1): 5.5/7.6 MBProgress (1): 5.5/7.6 MBProgress (1): 5.5/7.6 MBProgress (1): 5.5/7.6 MBProgress (1): 5.5/7.6 MBProgress (1): 5.5/7.6 MBProgress (1): 5.6/7.6 MBProgress (1): 5.6/7.6 MBProgress (1): 5.6/7.6 MBProgress (1): 5.6/7.6 MBProgress (1): 5.6/7.6 MBProgress (1): 5.6/7.6 MBProgress (1): 5.7/7.6 MBProgress (1): 5.7/7.6 MBProgress (1): 5.7/7.6 MBProgress (1): 5.7/7.6 MBProgress (1): 5.7/7.6 MBProgress (1): 5.7/7.6 MBProgress (1): 5.7/7.6 MBProgress (1): 5.8/7.6 MBProgress (1): 5.8/7.6 MBProgress (1): 5.8/7.6 MBProgress (1): 5.8/7.6 MBProgress (1): 5.8/7.6 MBProgress (1): 5.8/7.6 MBProgress (1): 5.9/7.6 MBProgress (1): 5.9/7.6 MBProgress (1): 5.9/7.6 MBProgress (1): 5.9/7.6 MBProgress (1): 5.9/7.6 MBProgress (1): 5.9/7.6 MBProgress (1): 6.0/7.6 MBProgress (1): 6.0/7.6 MBProgress (1): 6.0/7.6 MBProgress (1): 6.0/7.6 MBProgress (1): 6.0/7.6 MBProgress (1): 6.0/7.6 MBProgress (1): 6.1/7.6 MBProgress (1): 6.1/7.6 MBProgress (1): 6.1/7.6 MBProgress (1): 6.1/7.6 MBProgress (1): 6.1/7.6 MBProgress (1): 6.1/7.6 MBProgress (1): 6.2/7.6 MBProgress (1): 6.2/7.6 MBProgress (1): 6.2/7.6 MBProgress (1): 6.2/7.6 MBProgress (1): 6.2/7.6 MBProgress (1): 6.2/7.6 MBProgress (1): 6.3/7.6 MBProgress (1): 6.3/7.6 MBProgress (1): 6.3/7.6 MBProgress (1): 6.3/7.6 MBProgress (1): 6.3/7.6 MBProgress (1): 6.3/7.6 MBProgress (1): 6.3/7.6 MBProgress (1): 6.4/7.6 MBProgress (1): 6.4/7.6 MBProgress (1): 6.4/7.6 MBProgress (1): 6.4/7.6 MBProgress (1): 6.4/7.6 MBProgress (1): 6.4/7.6 MBProgress (1): 6.5/7.6 MBProgress (1): 6.5/7.6 MBProgress (1): 6.5/7.6 MBProgress (1): 6.5/7.6 MBProgress (1): 6.5/7.6 MBProgress (1): 6.5/7.6 MBProgress (1): 6.6/7.6 MBProgress (1): 6.6/7.6 MBProgress (1): 6.6/7.6 MBProgress (1): 6.6/7.6 MBProgress (1): 6.6/7.6 MBProgress (1): 6.6/7.6 MBProgress (1): 6.7/7.6 MBProgress (1): 6.7/7.6 MBProgress (1): 6.7/7.6 MBProgress (1): 6.7/7.6 MBProgress (1): 6.7/7.6 MBProgress (1): 6.7/7.6 MBProgress (1): 6.8/7.6 MBProgress (1): 6.8/7.6 MBProgress (1): 6.8/7.6 MBProgress (1): 6.8/7.6 MBProgress (1): 6.8/7.6 MBProgress (1): 6.8/7.6 MBProgress (1): 6.9/7.6 MBProgress (1): 6.9/7.6 MBProgress (1): 6.9/7.6 MBProgress (1): 6.9/7.6 MBProgress (1): 6.9/7.6 MBProgress (1): 6.9/7.6 MBProgress (1): 6.9/7.6 MBProgress (1): 7.0/7.6 MBProgress (1): 7.0/7.6 MBProgress (1): 7.0/7.6 MBProgress (1): 7.0/7.6 MBProgress (1): 7.0/7.6 MBProgress (1): 7.0/7.6 MBProgress (1): 7.1/7.6 MBProgress (1): 7.1/7.6 MBProgress (1): 7.1/7.6 MBProgress (1): 7.1/7.6 MBProgress (1): 7.1/7.6 MBProgress (1): 7.1/7.6 MBProgress (1): 7.2/7.6 MBProgress (1): 7.2/7.6 MBProgress (1): 7.2/7.6 MBProgress (1): 7.2/7.6 MBProgress (1): 7.2/7.6 MBProgress (1): 7.2/7.6 MBProgress (1): 7.3/7.6 MBProgress (1): 7.3/7.6 MBProgress (1): 7.3/7.6 MBProgress (1): 7.3/7.6 MBProgress (1): 7.3/7.6 MBProgress (1): 7.3/7.6 MBProgress (1): 7.4/7.6 MBProgress (1): 7.4/7.6 MBProgress (1): 7.4/7.6 MBProgress (1): 7.4/7.6 MBProgress (1): 7.4/7.6 MBProgress (1): 7.4/7.6 MBProgress (1): 7.5/7.6 MBProgress (1): 7.5/7.6 MBProgress (1): 7.5/7.6 MBProgress (1): 7.5/7.6 MBProgress (1): 7.5/7.6 MBProgress (1): 7.5/7.6 MBProgress (1): 7.6/7.6 MBProgress (1): 7.6 MB                        Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-9/zstd-jni-1.5.7-9.jar (7.6 MB at 5.3 MB/s)
+[INFO] Building jar: C:\LocalSpace\Repos\spring-petclinic-rest\target\spring-petclinic-rest-4.0.2.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ spring-petclinic-rest ---
+[INFO] Replacing main artifact C:\LocalSpace\Repos\spring-petclinic-rest\target\spring-petclinic-rest-4.0.2.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\LocalSpace\Repos\spring-petclinic-rest\target\spring-petclinic-rest-4.0.2.jar.original
+[INFO] 
+[INFO] --- jacoco:0.8.15:check (check) @ spring-petclinic-rest ---
+[INFO] Loading execution data file C:\LocalSpace\Repos\spring-petclinic-rest\target\jacoco.exec
+[INFO] Analyzed bundle 'spring-petclinic-rest' with 70 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- jacoco:0.8.15:report (report) @ spring-petclinic-rest ---
+[INFO] Loading execution data file C:\LocalSpace\Repos\spring-petclinic-rest\target\jacoco.exec
+[INFO] Analyzed bundle 'spring-petclinic-rest' with 70 classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:12 min
+[INFO] Finished at: 2026-10-28T15:30:29+05:30
+[INFO] ------------------------------------------------------------------------

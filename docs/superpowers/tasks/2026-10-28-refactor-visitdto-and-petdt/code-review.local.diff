@@ -1,0 +1,1161 @@
+diff --git a/pom.xml b/pom.xml
+index 0291e64..9cf6b8e 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -19,6 +19,8 @@
+ 
+     <properties>
+ 
++        <java.version>21</java.version>
++
+         <!-- Third-party libraries -->
+         <spring-data-jdbc.version>1.2.1.RELEASE</spring-data-jdbc.version>
+         <springdoc-openapi-ui.version>3.1.1</springdoc-openapi-ui.version>
+@@ -369,6 +371,11 @@
+                             <importMappings>
+                                 <importMapping>Nullable=org.jspecify.annotations.Nullable</importMapping>
+                             </importMappings>
++                            <!-- Pet and Visit are hand-written Java 21 records (not generated) -->
++                            <schemaMappings>
++                                <schemaMapping>Pet=org.springframework.samples.petclinic.rest.model.PetDto</schemaMapping>
++                                <schemaMapping>Visit=org.springframework.samples.petclinic.rest.model.VisitDto</schemaMapping>
++                            </schemaMappings>
+                             <configOptions>
+                                 <!-- RestController implementation is provided by Petclinic developers -->
+                                 <interfaceOnly>true</interfaceOnly>
+diff --git a/src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java b/src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java
+index e96124d..f18acd5 100755
+--- a/src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java
++++ b/src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java
+@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
+ import org.springframework.data.domain.Page;
+ import org.springframework.samples.petclinic.model.Pet;
+ import org.springframework.samples.petclinic.model.PetType;
+-import org.springframework.samples.petclinic.rest.dto.PetDto;
++import org.springframework.samples.petclinic.rest.model.PetDto;
+ import org.springframework.samples.petclinic.rest.dto.PetFieldsDto;
+ import org.springframework.samples.petclinic.rest.dto.PetPageDto;
+ import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
+diff --git a/src/main/java/org/springframework/samples/petclinic/mapper/VisitMapper.java b/src/main/java/org/springframework/samples/petclinic/mapper/VisitMapper.java
+index 98dc2db..650abda 100644
+--- a/src/main/java/org/springframework/samples/petclinic/mapper/VisitMapper.java
++++ b/src/main/java/org/springframework/samples/petclinic/mapper/VisitMapper.java
+@@ -3,7 +3,7 @@ package org.springframework.samples.petclinic.mapper;
+ import org.mapstruct.Mapper;
+ import org.mapstruct.Mapping;
+ import org.springframework.samples.petclinic.model.Visit;
+-import org.springframework.samples.petclinic.rest.dto.VisitDto;
++import org.springframework.samples.petclinic.rest.model.VisitDto;
+ import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
+ 
+ import java.util.Collection;
+@@ -11,7 +11,7 @@ import java.util.Collection;
+ /**
+  * Map Visit & VisitDto using mapstruct
+  */
+-@Mapper(uses = PetMapper.class)
++@Mapper
+ public interface VisitMapper {
+     @Mapping(source = "petId", target = "pet.id")
+     Visit toVisit(VisitDto visitDto);
+diff --git a/src/main/java/org/springframework/samples/petclinic/rest/advice/ExceptionControllerAdvice.java b/src/main/java/org/springframework/samples/petclinic/rest/advice/ExceptionControllerAdvice.java
+index 5f3b15d..055e9e6 100644
+--- a/src/main/java/org/springframework/samples/petclinic/rest/advice/ExceptionControllerAdvice.java
++++ b/src/main/java/org/springframework/samples/petclinic/rest/advice/ExceptionControllerAdvice.java
+@@ -28,6 +28,7 @@ import org.springframework.dao.DataIntegrityViolationException;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ProblemDetail;
+ import org.springframework.http.ResponseEntity;
++import org.springframework.http.converter.HttpMessageNotReadableException;
+ import org.springframework.samples.petclinic.rest.controller.BindingErrorsResponse;
+ import org.springframework.samples.petclinic.rest.dto.ValidationMessageDto;
+ import org.springframework.validation.BindingResult;
+@@ -147,4 +148,24 @@ public class ExceptionControllerAdvice {
+         return ResponseEntity.status(status).body(detail);
+     }
+ 
++    /**
++     * Handles request bodies that cannot be read or bound, e.g. when a record constructor rejects a value
++     * during JSON deserialization.
++     *
++     * @param e The {@link HttpMessageNotReadableException} to be handled
++     * @param request {@link HttpServletRequest} object referring to the current request.
++     * @return A {@link ResponseEntity} containing the error information and a 400 Bad Request status.
++     */
++    @ExceptionHandler(HttpMessageNotReadableException.class)
++    @ResponseBody
++    public ResponseEntity<ProblemDetail> handleHttpMessageNotReadableException(HttpMessageNotReadableException e, HttpServletRequest request) {
++        logger.warn("Unreadable request body at {} {}: {}",
++            request.getMethod(),
++            request.getRequestURI(),
++            e.getMessage());
++        HttpStatus status = HttpStatus.BAD_REQUEST;
++        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_INVALID_REQUEST);
++        return ResponseEntity.status(status).body(detail);
++    }
++
+ }
+diff --git a/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java b/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java
+index 5a62a9e..137c612 100644
+--- a/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java
++++ b/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java
+@@ -31,9 +31,9 @@ import org.springframework.samples.petclinic.model.Visit;
+ import org.springframework.samples.petclinic.rest.api.OwnersApi;
+ import org.springframework.samples.petclinic.rest.dto.OwnerDto;
+ import org.springframework.samples.petclinic.rest.dto.OwnerFieldsDto;
+-import org.springframework.samples.petclinic.rest.dto.PetDto;
++import org.springframework.samples.petclinic.rest.model.PetDto;
+ import org.springframework.samples.petclinic.rest.dto.PetFieldsDto;
+-import org.springframework.samples.petclinic.rest.dto.VisitDto;
++import org.springframework.samples.petclinic.rest.model.VisitDto;
+ import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
+ import org.springframework.samples.petclinic.service.ClinicService;
+ import org.springframework.security.access.prepost.PreAuthorize;
+diff --git a/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/PetRestControllerV1.java b/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/PetRestControllerV1.java
+index d45ca64..f849cb4 100644
+--- a/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/PetRestControllerV1.java
++++ b/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/PetRestControllerV1.java
+@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
+ import org.springframework.samples.petclinic.mapper.PetMapper;
+ import org.springframework.samples.petclinic.model.Pet;
+ import org.springframework.samples.petclinic.rest.api.PetsApi;
+-import org.springframework.samples.petclinic.rest.dto.PetDto;
++import org.springframework.samples.petclinic.rest.model.PetDto;
+ import org.springframework.samples.petclinic.service.ClinicService;
+ import org.springframework.security.access.prepost.PreAuthorize;
+ import org.springframework.web.bind.annotation.CrossOrigin;
+@@ -77,9 +77,9 @@ public class PetRestControllerV1 implements PetsApi {
+         if (currentPet == null) {
+             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+         }
+-        currentPet.setBirthDate(petDto.getBirthDate());
+-        currentPet.setName(petDto.getName());
+-        currentPet.setType(petMapper.toPetType(petDto.getType()));
++        currentPet.setBirthDate(petDto.birthDate());
++        currentPet.setName(petDto.name());
++        currentPet.setType(petMapper.toPetType(petDto.type()));
+         this.clinicService.savePet(currentPet);
+         return new ResponseEntity<>(petMapper.toPetDto(currentPet), HttpStatus.NO_CONTENT);
+     }
+diff --git a/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/VisitRestControllerV1.java b/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/VisitRestControllerV1.java
+index 3eae2ec..33ac3d8 100644
+--- a/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/VisitRestControllerV1.java
++++ b/src/main/java/org/springframework/samples/petclinic/rest/controller/v1/VisitRestControllerV1.java
+@@ -22,7 +22,7 @@ import org.springframework.http.ResponseEntity;
+ import org.springframework.samples.petclinic.mapper.VisitMapper;
+ import org.springframework.samples.petclinic.model.Visit;
+ import org.springframework.samples.petclinic.rest.api.VisitsApi;
+-import org.springframework.samples.petclinic.rest.dto.VisitDto;
++import org.springframework.samples.petclinic.rest.model.VisitDto;
+ import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
+ import org.springframework.samples.petclinic.service.ClinicService;
+ import org.springframework.security.access.prepost.PreAuthorize;
+diff --git a/src/main/java/org/springframework/samples/petclinic/rest/model/PetDto.java b/src/main/java/org/springframework/samples/petclinic/rest/model/PetDto.java
+new file mode 100644
+index 0000000..13e6e6f
+--- /dev/null
++++ b/src/main/java/org/springframework/samples/petclinic/rest/model/PetDto.java
+@@ -0,0 +1,85 @@
++package org.springframework.samples.petclinic.rest.model;
++
++import com.fasterxml.jackson.annotation.JsonProperty;
++import com.fasterxml.jackson.annotation.JsonTypeName;
++import io.swagger.v3.oas.annotations.media.Schema;
++import jakarta.validation.Valid;
++import jakarta.validation.constraints.Min;
++import jakarta.validation.constraints.NotNull;
++import jakarta.validation.constraints.Size;
++import org.jspecify.annotations.Nullable;
++import org.springframework.format.annotation.DateTimeFormat;
++import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
++import org.springframework.samples.petclinic.rest.validation.PetAgeValidation;
++
++import java.time.LocalDate;
++import java.util.List;
++
++/**
++ * A pet.
++ * <p>
++ * Hand-written record that replaces the generated {@code PetDto} (see {@code schemaMappings} in the pom).
++ * The compact constructor rejects null/out-of-bounds values and defensively copies {@code visits}.
++ * The pet-age rule stays in {@link PetAgeValidation}.
++ *
++ * @param name      the name of the pet (at most 30 characters)
++ * @param birthDate the date of birth of the pet
++ * @param type      the pet type
++ * @param id        the ID of the pet
++ * @param ownerId   the ID of the pet's owner
++ * @param visits    vet visit bookings for this pet (never null, unmodifiable)
++ */
++@Schema(name = "Pet", description = "A pet.")
++@JsonTypeName("Pet")
++public record PetDto(
++    @NotNull @Size(max = 30)
++    @Schema(name = "name", example = "Leo", description = "The name of the pet.", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("name")
++    String name,
++
++    @NotNull @Valid
++    @PetAgeValidation
++    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
++    @Schema(name = "birthDate", example = "2010-09-07", description = "The date of birth of the pet.", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("birthDate")
++    LocalDate birthDate,
++
++    @NotNull @Valid
++    @Schema(name = "type", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("type")
++    PetTypeDto type,
++
++    @Min(value = 0)
++    @Schema(name = "id", accessMode = Schema.AccessMode.READ_ONLY, example = "1", description = "The ID of the pet.", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("id")
++    @Nullable Integer id,
++
++    @Min(value = 0)
++    @Schema(name = "ownerId", accessMode = Schema.AccessMode.READ_ONLY, example = "1", description = "The ID of the pet's owner.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
++    @JsonProperty("ownerId")
++    @Nullable Integer ownerId,
++
++    @Schema(name = "visits", accessMode = Schema.AccessMode.READ_ONLY, description = "Vet visit bookings for this pet.", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("visits")
++    List<@Valid VisitDto> visits
++) {
++
++    public PetDto {
++        if (name == null || name.length() > 30) {
++            throw new IllegalArgumentException("name must not be null and must be at most 30 characters");
++        }
++        if (birthDate == null) {
++            throw new IllegalArgumentException("birthDate must not be null");
++        }
++        if (type == null) {
++            throw new IllegalArgumentException("type must not be null");
++        }
++        if (id != null && id < 0) {
++            throw new IllegalArgumentException("id must be >= 0");
++        }
++        if (ownerId != null && ownerId < 0) {
++            throw new IllegalArgumentException("ownerId must be >= 0");
++        }
++        visits = visits == null ? List.of() : List.copyOf(visits);
++    }
++}
+diff --git a/src/main/java/org/springframework/samples/petclinic/rest/model/VisitDto.java b/src/main/java/org/springframework/samples/petclinic/rest/model/VisitDto.java
+new file mode 100644
+index 0000000..61c50f9
+--- /dev/null
++++ b/src/main/java/org/springframework/samples/petclinic/rest/model/VisitDto.java
+@@ -0,0 +1,62 @@
++package org.springframework.samples.petclinic.rest.model;
++
++import com.fasterxml.jackson.annotation.JsonProperty;
++import com.fasterxml.jackson.annotation.JsonTypeName;
++import io.swagger.v3.oas.annotations.media.Schema;
++import jakarta.validation.Valid;
++import jakarta.validation.constraints.Min;
++import jakarta.validation.constraints.NotNull;
++import jakarta.validation.constraints.Size;
++import org.jspecify.annotations.Nullable;
++import org.springframework.format.annotation.DateTimeFormat;
++
++import java.time.LocalDate;
++
++/**
++ * A booking for a vet visit.
++ * <p>
++ * Hand-written record that replaces the generated {@code VisitDto} (see {@code schemaMappings} in the pom).
++ * The compact constructor enforces the same bounds as the OpenAPI schema, so invalid data fails fast.
++ *
++ * @param date        the date of the visit
++ * @param description the description for the visit (1..255 characters)
++ * @param id          the ID of the visit
++ * @param petId       the ID of the pet
++ */
++@Schema(name = "Visit", description = "A booking for a vet visit.")
++@JsonTypeName("Visit")
++public record VisitDto(
++    @Valid
++    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
++    @Schema(name = "date", example = "2013-01-01", description = "The date of the visit.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
++    @JsonProperty("date")
++    @Nullable LocalDate date,
++
++    @NotNull @Size(min = 1, max = 255)
++    @Schema(name = "description", example = "rabies shot", description = "The description for the visit.", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("description")
++    String description,
++
++    @Min(value = 0)
++    @Schema(name = "id", accessMode = Schema.AccessMode.READ_ONLY, example = "1", description = "The ID of the visit.", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("id")
++    @Nullable Integer id,
++
++    @NotNull @Min(value = 0)
++    @Schema(name = "petId", example = "1", description = "The ID of the pet.", requiredMode = Schema.RequiredMode.REQUIRED)
++    @JsonProperty("petId")
++    Integer petId
++) {
++
++    public VisitDto {
++        if (description == null || description.isEmpty() || description.length() > 255) {
++            throw new IllegalArgumentException("description must be between 1 and 255 characters");
++        }
++        if (petId == null || petId < 0) {
++            throw new IllegalArgumentException("petId must not be null and must be >= 0");
++        }
++        if (id != null && id < 0) {
++            throw new IllegalArgumentException("id must be >= 0");
++        }
++    }
++}
+diff --git a/src/test/java/org/springframework/samples/petclinic/mapper/PetMapperTests.java b/src/test/java/org/springframework/samples/petclinic/mapper/PetMapperTests.java
+new file mode 100644
+index 0000000..e948cc1
+--- /dev/null
++++ b/src/test/java/org/springframework/samples/petclinic/mapper/PetMapperTests.java
+@@ -0,0 +1,118 @@
++package org.springframework.samples.petclinic.mapper;
++
++import static org.assertj.core.api.Assertions.assertThat;
++
++import java.time.LocalDate;
++import java.util.Collection;
++import java.util.List;
++
++import org.junit.jupiter.api.Test;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.data.domain.PageImpl;
++import org.springframework.data.domain.PageRequest;
++import org.springframework.samples.petclinic.model.Owner;
++import org.springframework.samples.petclinic.model.Pet;
++import org.springframework.samples.petclinic.model.PetType;
++import org.springframework.samples.petclinic.model.Visit;
++import org.springframework.samples.petclinic.rest.dto.PetPageDto;
++import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
++import org.springframework.samples.petclinic.rest.model.PetDto;
++import org.springframework.samples.petclinic.rest.model.VisitDto;
++import org.springframework.samples.petclinic.service.ClinicService;
++import org.springframework.samples.petclinic.service.clinicService.ApplicationTestConfig;
++import org.springframework.test.context.ContextConfiguration;
++import org.springframework.test.context.bean.override.mockito.MockitoBean;
++import org.springframework.test.context.web.WebAppConfiguration;
++
++@SpringBootTest
++@ContextConfiguration(classes = ApplicationTestConfig.class)
++@WebAppConfiguration
++class PetMapperTests {
++
++    @MockitoBean
++    private ClinicService clinicService;
++
++    @Autowired
++    private PetMapper petMapper;
++
++    private static Pet pet(int id, String name) {
++        Owner owner = new Owner();
++        owner.setId(1);
++        PetType type = new PetType();
++        type.setId(2);
++        type.setName("dog");
++        Pet pet = new Pet();
++        pet.setId(id);
++        pet.setName(name);
++        pet.setBirthDate(LocalDate.of(2018, 3, 4));
++        pet.setType(type);
++        pet.setOwner(owner);
++        return pet;
++    }
++
++    private static void addVisit(Pet pet, int id, LocalDate date, String description) {
++        Visit visit = new Visit();
++        visit.setId(id);
++        visit.setDate(date);
++        visit.setDescription(description);
++        pet.addVisit(visit);
++    }
++
++    @Test
++    void mapsPetToDtoWithOwnerIdTypeAndSortedVisits() {
++        Pet pet = pet(3, "Rosy");
++        addVisit(pet, 10, LocalDate.of(2020, 1, 1), "older");
++        addVisit(pet, 11, LocalDate.of(2021, 1, 1), "newer");
++
++        PetDto dto = petMapper.toPetDto(pet);
++
++        assertThat(dto.id()).isEqualTo(3);
++        assertThat(dto.name()).isEqualTo("Rosy");
++        assertThat(dto.birthDate()).isEqualTo(LocalDate.of(2018, 3, 4));
++        assertThat(dto.ownerId()).isEqualTo(1);
++        assertThat(dto.type().getId()).isEqualTo(2);
++        assertThat(dto.type().getName()).isEqualTo("dog");
++        assertThat(dto.visits()).extracting(VisitDto::description).containsExactly("newer", "older");
++        assertThat(dto.visits()).extracting(VisitDto::petId).containsOnly(3);
++    }
++
++    @Test
++    void mapsDtoToPetWithOwnerId() {
++        PetTypeDto type = new PetTypeDto("cat", 1);
++        PetDto dto = new PetDto("Leo", LocalDate.of(2010, 9, 7), type, 5, 7,
++            List.of(new VisitDto(LocalDate.of(2020, 1, 1), "checkup", 9, 5)));
++
++        Pet pet = petMapper.toPet(dto);
++
++        assertThat(pet.getId()).isEqualTo(5);
++        assertThat(pet.getName()).isEqualTo("Leo");
++        assertThat(pet.getOwner().getId()).isEqualTo(7);
++        assertThat(pet.getType().getName()).isEqualTo("cat");
++        assertThat(pet.getVisits()).hasSize(1);
++        assertThat(pet.getVisits().get(0).getDescription()).isEqualTo("checkup");
++    }
++
++    @Test
++    void mapsCollections() {
++        Collection<PetDto> dtos = petMapper.toPetsDto(List.of(pet(1, "A"), pet(2, "B")));
++        assertThat(dtos).extracting(PetDto::name).containsExactly("A", "B");
++        assertThat(petMapper.toPets(dtos)).extracting(Pet::getName).containsExactly("A", "B");
++        assertThat(petMapper.toPetsDto(List.of())).isEmpty();
++        assertThat(petMapper.toPets(List.of())).isEmpty();
++    }
++
++    @Test
++    void nullPetMapsToNull() {
++        assertThat(petMapper.toPetDto(null)).isNull();
++        assertThat(petMapper.toPet((PetDto) null)).isNull();
++    }
++
++    @Test
++    void mapsPageToPetPageDto() {
++        PageRequest pageRequest = PageRequest.of(0, 2);
++        PetPageDto page = petMapper.toPetPageDto(new PageImpl<>(List.of(pet(1, "A")), pageRequest, 1));
++        assertThat(page.getContent()).extracting(PetDto::name).containsExactly("A");
++        assertThat(page.getTotalElements()).isEqualTo(1);
++    }
++}
+diff --git a/src/test/java/org/springframework/samples/petclinic/mapper/VisitMapperTests.java b/src/test/java/org/springframework/samples/petclinic/mapper/VisitMapperTests.java
+new file mode 100644
+index 0000000..8f43de8
+--- /dev/null
++++ b/src/test/java/org/springframework/samples/petclinic/mapper/VisitMapperTests.java
+@@ -0,0 +1,90 @@
++package org.springframework.samples.petclinic.mapper;
++
++import static org.assertj.core.api.Assertions.assertThat;
++import static org.assertj.core.api.Assertions.assertThatThrownBy;
++
++import java.time.LocalDate;
++import java.util.Collection;
++import java.util.List;
++
++import org.junit.jupiter.api.Test;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.samples.petclinic.model.Pet;
++import org.springframework.samples.petclinic.model.Visit;
++import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
++import org.springframework.samples.petclinic.rest.model.VisitDto;
++import org.springframework.samples.petclinic.service.ClinicService;
++import org.springframework.samples.petclinic.service.clinicService.ApplicationTestConfig;
++import org.springframework.test.context.ContextConfiguration;
++import org.springframework.test.context.bean.override.mockito.MockitoBean;
++import org.springframework.test.context.web.WebAppConfiguration;
++
++@SpringBootTest
++@ContextConfiguration(classes = ApplicationTestConfig.class)
++@WebAppConfiguration
++class VisitMapperTests {
++
++    @MockitoBean
++    private ClinicService clinicService;
++
++    @Autowired
++    private VisitMapper visitMapper;
++
++    private static Visit visit(int id, int petId, String description) {
++        Pet pet = new Pet();
++        pet.setId(petId);
++        Visit visit = new Visit();
++        visit.setId(id);
++        visit.setDate(LocalDate.of(2013, 1, 1));
++        visit.setDescription(description);
++        visit.setPet(pet);
++        return visit;
++    }
++
++    @Test
++    void mapsPetIdToPetIdAndBack() {
++        VisitDto dto = visitMapper.toVisitDto(visit(2, 8, "rabies shot"));
++        assertThat(dto.id()).isEqualTo(2);
++        assertThat(dto.petId()).isEqualTo(8);
++        assertThat(dto.description()).isEqualTo("rabies shot");
++        assertThat(dto.date()).isEqualTo(LocalDate.of(2013, 1, 1));
++
++        Visit visit = visitMapper.toVisit(dto);
++        assertThat(visit.getId()).isEqualTo(2);
++        assertThat(visit.getPet().getId()).isEqualTo(8);
++        assertThat(visit.getDescription()).isEqualTo("rabies shot");
++        assertThat(visit.getDate()).isEqualTo(LocalDate.of(2013, 1, 1));
++    }
++
++    @Test
++    void mapsVisitFieldsIgnoringIdAndPet() {
++        VisitFieldsDto fields = new VisitFieldsDto("neutered").date(LocalDate.of(2020, 5, 5));
++        Visit visit = visitMapper.toVisit(fields);
++        assertThat(visit.getId()).isNull();
++        assertThat(visit.getPet()).isNull();
++        assertThat(visit.getDescription()).isEqualTo("neutered");
++        assertThat(visit.getDate()).isEqualTo(LocalDate.of(2020, 5, 5));
++    }
++
++    @Test
++    void mapsCollection() {
++        Collection<VisitDto> dtos = visitMapper.toVisitsDto(List.of(visit(1, 8, "a"), visit(2, 8, "b")));
++        assertThat(dtos).extracting(VisitDto::description).containsExactly("a", "b");
++        assertThat(visitMapper.toVisitsDto(List.of())).isEmpty();
++    }
++
++    @Test
++    void nullInputsMapToNull() {
++        assertThat(visitMapper.toVisitDto(null)).isNull();
++        assertThat(visitMapper.toVisit((VisitDto) null)).isNull();
++        assertThat(visitMapper.toVisit((VisitFieldsDto) null)).isNull();
++        assertThat(visitMapper.toVisitsDto(null)).isNull();
++    }
++
++    @Test
++    void visitWithNullDescriptionFailsToMap() {
++        Visit visit = visit(2, 8, null);
++        assertThatThrownBy(() -> visitMapper.toVisitDto(visit)).isInstanceOf(IllegalArgumentException.class);
++    }
++}
+diff --git a/src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java b/src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java
+index c4a6092..f5fd90b 100644
+--- a/src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java
++++ b/src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java
+@@ -30,9 +30,9 @@ import org.springframework.samples.petclinic.mapper.VisitMapper;
+ import org.springframework.samples.petclinic.model.Owner;
+ import org.springframework.samples.petclinic.rest.advice.ExceptionControllerAdvice;
+ import org.springframework.samples.petclinic.rest.dto.OwnerDto;
+-import org.springframework.samples.petclinic.rest.dto.PetDto;
+ import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
+-import org.springframework.samples.petclinic.rest.dto.VisitDto;
++import org.springframework.samples.petclinic.rest.model.PetDto;
++import org.springframework.samples.petclinic.rest.model.VisitDto;
+ import org.springframework.samples.petclinic.service.ClinicService;
+ import org.springframework.samples.petclinic.service.clinicService.ApplicationTestConfig;
+ import org.springframework.security.test.context.support.WithMockUser;
+@@ -110,44 +110,31 @@ class OwnerRestControllerV1Tests {
+             .name("dog");
+ 
+         pets = new ArrayList<>();
+-        PetDto pet = new PetDto();
+-        pets.add(pet.id(3)
+-            .name("Rosy")
+-            .birthDate(LocalDate.now())
+-            .type(petType));
+-
+-        pet = new PetDto();
+-        pets.add(pet.id(4)
+-            .name("Jewel")
+-            .birthDate(LocalDate.now())
+-            .type(petType));
++        pets.add(new PetDto("Rosy", LocalDate.now(), petType, 3, null, List.of()));
++        PetDto pet = new PetDto("Jewel", LocalDate.now(), petType, 4, null, List.of());
++        pets.add(pet);
+ 
+         visits = new ArrayList<>();
+-        VisitDto visit = new VisitDto();
+-        visit.setId(2);
+-        visit.setPetId(pet.getId());
+-        visit.setDate(LocalDate.now());
+-        visit.setDescription("rabies shot");
+-        visits.add(visit);
+-
+-        visit = new VisitDto();
+-        visit.setId(3);
+-        visit.setPetId(pet.getId());
+-        visit.setDate(LocalDate.now());
+-        visit.setDescription("neutered");
+-        visits.add(visit);
++        visits.add(new VisitDto(LocalDate.now(), "rabies shot", 2, pet.id()));
++        visits.add(new VisitDto(LocalDate.now(), "neutered", 3, pet.id()));
+     }
+ 
+     private PetDto getTestPetWithIdAndName(final int id, final String name) {
+         PetTypeDto petType = new PetTypeDto();
+-        PetDto pet = new PetDto();
+-        pet.id(id).name(name).birthDate(LocalDate.now()).type(petType.id(2).name("dog")).addVisitsItem(getTestVisitForPet(1));
+-        return pet;
++        petType.id(2).name("dog");
++        return new PetDto(name, LocalDate.now(), petType, id, null, List.of(getTestVisitForPet(1, id)));
++    }
++
++    private VisitDto getTestVisitForPet(final int id, final int petId) {
++        return new VisitDto(LocalDate.now(), "test" + id, id, petId);
+     }
+ 
+-    private VisitDto getTestVisitForPet(final int id) {
+-        VisitDto visit = new VisitDto();
+-        return visit.id(id).date(LocalDate.now()).description("test" + id);
++    private static PetDto withId(PetDto pet, Integer id) {
++        return new PetDto(pet.name(), pet.birthDate(), pet.type(), id, pet.ownerId(), pet.visits());
++    }
++
++    private static PetDto withNameAndBirthDate(PetDto pet, String name, LocalDate birthDate) {
++        return new PetDto(name, birthDate, pet.type(), pet.id(), pet.ownerId(), pet.visits());
+     }
+ 
+     @Test
+@@ -347,8 +334,7 @@ class OwnerRestControllerV1Tests {
+     void testCreatePetSuccess() throws Exception {
+         final Owner owner = ownerMapper.toOwner(owners.get(0));
+         given(this.clinicService.findOwnerById(1)).willReturn(owner);
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(999);
++        PetDto newPet = withId(pets.get(0), 999);
+         ObjectMapper mapper =  JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -362,13 +348,7 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreatePetError() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(null);
+-        newPet.setName(null);
+-        ObjectMapper mapper =  JsonMapper.builder()
+-            .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+-            .build();
+-        String newPetAsJSON = mapper.writeValueAsString(newPet);
++        String newPetAsJSON = "{\"name\":null,\"birthDate\":\"" + LocalDate.now() + "\",\"type\":{\"id\":2,\"name\":\"dog\"}}";
+         this.mockMvc.perform(post("/api/owners/1/pets")
+                 .content(newPetAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+             .andExpect(status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+@@ -377,8 +357,7 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreatePetShouldNotExposeTechnicalDetails() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(null);
++        PetDto newPet = withId(pets.get(0), null);
+         ObjectMapper mapper =  JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -396,8 +375,7 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreatePetWithUnknownOwnerShouldReturnNotFound() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(null);
++        PetDto newPet = withId(pets.get(0), null);
+         ObjectMapper mapper = JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -411,13 +389,7 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreatePetWithNullTypeShouldReturnBadRequestWithGenericDetail() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(null);
+-        newPet.setType(null);
+-        ObjectMapper mapper = JsonMapper.builder()
+-            .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+-            .build();
+-        String newPetAsJSON = mapper.writeValueAsString(newPet);
++        String newPetAsJSON = "{\"name\":\"Rosy\",\"birthDate\":\"" + LocalDate.now() + "\",\"type\":null}";
+         this.mockMvc.perform(post("/api/owners/1/pets")
+                 .content(newPetAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+             .andDo(MockMvcResultHandlers.print())
+@@ -434,9 +406,8 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreatePetWithEmptyTypeNameShouldReturnBadRequestWithGenericDetail() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(null);
+-        newPet.getType().setName("");
++        PetDto base = pets.get(0);
++        PetDto newPet = new PetDto(base.name(), base.birthDate(), new PetTypeDto("", 2), null, base.ownerId(), base.visits());
+         ObjectMapper mapper = JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -457,9 +428,8 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreatePetWithNullTypeIdShouldReturnBadRequestWithGenericDetail() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(null);
+-        newPet.getType().setId(null);
++        PetDto base = pets.get(0);
++        PetDto newPet = new PetDto(base.name(), base.birthDate(), new PetTypeDto("dog", null), null, base.ownerId(), base.visits());
+         ObjectMapper mapper = JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -480,8 +450,7 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreatePetWithUnexpectedErrorShouldReturnInternalServerErrorWithGenericDetail() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setId(null);
++        PetDto newPet = withId(pets.get(0), null);
+         ObjectMapper mapper = JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -519,8 +488,8 @@ class OwnerRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testCreateVisitSuccess() throws Exception {
+-        VisitDto newVisit = visits.get(0);
+-        newVisit.setId(999);
++        VisitDto base = visits.get(0);
++        VisitDto newVisit = new VisitDto(base.date(), base.description(), 999, base.petId());
+         ObjectMapper mapper = new ObjectMapper();
+         String newVisitAsJSON = mapper.writeValueAsString(visitMapper.toVisit(newVisit));
+         System.out.println("newVisitAsJSON " + newVisitAsJSON);
+@@ -568,12 +537,10 @@ class OwnerRestControllerV1Tests {
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testUpdateOwnersPetSuccess() throws Exception {
+         int ownerId = owners.get(0).getId();
+-        int petId = pets.get(0).getId();
++        int petId = pets.get(0).id();
+         given(this.clinicService.findOwnerById(ownerId)).willReturn(ownerMapper.toOwner(owners.get(0)));
+         given(this.clinicService.findPetById(petId)).willReturn(petMapper.toPet(pets.get(0)));
+-        PetDto updatedPetDto = pets.get(0);
+-        updatedPetDto.setName("Rex");
+-        updatedPetDto.setBirthDate(LocalDate.of(2020, 1, 15));
++        PetDto updatedPetDto = withNameAndBirthDate(pets.get(0), "Rex", LocalDate.of(2020, 1, 15));
+         ObjectMapper mapper =  JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -589,10 +556,9 @@ class OwnerRestControllerV1Tests {
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testUpdateOwnersPetOwnerNotFound() throws Exception {
+         int ownerId = 0;
+-        int petId = pets.get(0).getId();
++        int petId = pets.get(0).id();
+         given(this.clinicService.findOwnerById(ownerId)).willReturn(null);
+-        PetDto petDto = pets.get(0);
+-        petDto.setName("Thor");
++        PetDto petDto = withNameAndBirthDate(pets.get(0), "Thor", pets.get(0).birthDate());
+         ObjectMapper mapper =  JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -610,9 +576,7 @@ class OwnerRestControllerV1Tests {
+         int petId = 0;
+         given(this.clinicService.findOwnerById(ownerId)).willReturn(ownerMapper.toOwner(owners.get(0)));
+         given(this.clinicService.findPetById(petId)).willReturn(null);
+-        PetDto petDto = pets.get(0);
+-        petDto.setName("Ghost");
+-        petDto.setBirthDate(LocalDate.of(2020, 1, 1));
++        PetDto petDto = withNameAndBirthDate(pets.get(0), "Ghost", LocalDate.of(2020, 1, 1));
+         ObjectMapper mapper =  JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+diff --git a/src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java b/src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java
+index a9b4f82..4fb3e9f 100644
+--- a/src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java
++++ b/src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java
+@@ -27,8 +27,8 @@ import org.springframework.samples.petclinic.mapper.PetMapper;
+ import org.springframework.samples.petclinic.model.Pet;
+ import org.springframework.samples.petclinic.rest.advice.ExceptionControllerAdvice;
+ import org.springframework.samples.petclinic.rest.dto.OwnerDto;
+-import org.springframework.samples.petclinic.rest.dto.PetDto;
+ import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
++import org.springframework.samples.petclinic.rest.model.PetDto;
+ import org.springframework.samples.petclinic.service.ClinicService;
+ import org.springframework.samples.petclinic.service.clinicService.ApplicationTestConfig;
+ import org.springframework.security.test.context.support.WithMockUser;
+@@ -90,17 +90,12 @@ class PetRestControllerV1Tests {
+         petType.id(2)
+             .name("dog");
+ 
+-        PetDto pet = new PetDto();
+-        pets.add(pet.id(3)
+-            .name("Rosy")
+-            .birthDate(LocalDate.now())
+-            .type(petType));
+-
+-        pet = new PetDto();
+-        pets.add(pet.id(4)
+-            .name("Jewel")
+-            .birthDate(LocalDate.now())
+-            .type(petType));
++        pets.add(new PetDto("Rosy", LocalDate.now(), petType, 3, null, List.of()));
++        pets.add(new PetDto("Jewel", LocalDate.now(), petType, 4, null, List.of()));
++    }
++
++    private static PetDto withName(PetDto pet, String name) {
++        return new PetDto(name, pet.birthDate(), pet.type(), pet.id(), pet.ownerId(), pet.visits());
+     }
+ 
+     @Test
+@@ -154,8 +149,7 @@ class PetRestControllerV1Tests {
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testUpdatePetSuccess() throws Exception {
+         given(this.clinicService.findPetById(3)).willReturn(petMapper.toPet(pets.get(0)));
+-        PetDto newPet = pets.get(0);
+-        newPet.setName("Rosy I");
++        PetDto newPet = withName(pets.get(0), "Rosy I");
+         ObjectMapper mapper =  JsonMapper.builder()
+             .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+             .build();
+@@ -178,18 +172,45 @@ class PetRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testUpdatePetError() throws Exception {
+-        PetDto newPet = pets.get(0);
+-        newPet.setName(null);
+-        ObjectMapper mapper =  JsonMapper.builder()
+-            .defaultDateFormat(new SimpleDateFormat("dd/MM/yyyy"))
+-            .build();
+-        String newPetAsJSON = mapper.writeValueAsString(newPet);
++        String newPetAsJSON = petJson("Rosy", LocalDate.now().toString());
+ 
+         this.mockMvc.perform(put("/api/pets/3")
+-                .content(newPetAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
++                .content(newPetAsJSON.replace("\"Rosy\"", "null")).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
++            .andExpect(status().isBadRequest());
++    }
++
++    @Test
++    @WithMockUser(roles = "OWNER_ADMIN")
++    void testUpdatePetNullNameReturns400() throws Exception {
++        this.mockMvc.perform(put("/api/pets/3")
++                .content("{\"name\":null,\"birthDate\":\"2020-01-01\",\"type\":{\"id\":2,\"name\":\"dog\"},\"id\":3}")
++                .accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+             .andExpect(status().isBadRequest());
+     }
+ 
++    @Test
++    @WithMockUser(roles = "OWNER_ADMIN")
++    void testUpdatePetTooLongNameReturns400() throws Exception {
++        this.mockMvc.perform(put("/api/pets/3")
++                .content(petJson("x".repeat(31), "2020-01-01"))
++                .accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
++            .andExpect(status().isBadRequest());
++    }
++
++    @Test
++    @WithMockUser(roles = "OWNER_ADMIN")
++    void testUpdatePetFutureBirthDateReturns400() throws Exception {
++        this.mockMvc.perform(put("/api/pets/3")
++                .content(petJson("Rosy", LocalDate.now().plusYears(1).toString()))
++                .accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
++            .andExpect(status().isBadRequest());
++    }
++
++    private static String petJson(String name, String birthDate) {
++        return "{\"name\":\"" + name + "\",\"birthDate\":\"" + birthDate
++            + "\",\"type\":{\"id\":2,\"name\":\"dog\"},\"id\":3}";
++    }
++
+     @Test
+     @WithMockUser(roles = "OWNER_ADMIN")
+     void testDeletePetSuccess() throws Exception {
+diff --git a/src/test/java/org/springframework/samples/petclinic/rest/controller/V2RestControllersTests.java b/src/test/java/org/springframework/samples/petclinic/rest/controller/V2RestControllersTests.java
+index 31ba97c..1e66a40 100644
+--- a/src/test/java/org/springframework/samples/petclinic/rest/controller/V2RestControllersTests.java
++++ b/src/test/java/org/springframework/samples/petclinic/rest/controller/V2RestControllersTests.java
+@@ -14,7 +14,7 @@ import org.springframework.samples.petclinic.rest.advice.ExceptionControllerAdvi
+ import org.springframework.samples.petclinic.rest.controller.v2.OwnerRestControllerV2;
+ import org.springframework.samples.petclinic.rest.controller.v2.PetRestControllerV2;
+ import org.springframework.samples.petclinic.rest.dto.OwnerDto;
+-import org.springframework.samples.petclinic.rest.dto.PetDto;
++import org.springframework.samples.petclinic.rest.model.PetDto;
+ import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
+ import org.springframework.samples.petclinic.service.ClinicService;
+ import org.springframework.samples.petclinic.service.clinicService.ApplicationTestConfig;
+@@ -80,17 +80,8 @@ public class V2RestControllersTests {
+             .name("dog");
+ 
+         pets = new ArrayList<>();
+-        PetDto pet = new PetDto();
+-        pets.add(pet.id(3)
+-            .name("Rosy")
+-            .birthDate(LocalDate.now())
+-            .type(petType));
+-
+-        pet = new PetDto();
+-        pets.add(pet.id(4)
+-            .name("Jewel")
+-            .birthDate(LocalDate.now())
+-            .type(petType));
++        pets.add(new PetDto("Rosy", LocalDate.now(), petType, 3, null, List.of()));
++        pets.add(new PetDto("Jewel", LocalDate.now(), petType, 4, null, List.of()));
+     }
+ 
+     @Test
+diff --git a/src/test/java/org/springframework/samples/petclinic/rest/controller/VisitRestControllerV1Tests.java b/src/test/java/org/springframework/samples/petclinic/rest/controller/VisitRestControllerV1Tests.java
+index 6fd5dde..af4e1e3 100644
+--- a/src/test/java/org/springframework/samples/petclinic/rest/controller/VisitRestControllerV1Tests.java
++++ b/src/test/java/org/springframework/samples/petclinic/rest/controller/VisitRestControllerV1Tests.java
+@@ -175,16 +175,30 @@ class VisitRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles="OWNER_ADMIN")
+     void testCreateVisitError() throws Exception {
+-    	Visit newVisit = visits.get(0);
+-    	newVisit.setId(null);
+-        newVisit.setDescription(null);
+-    	ObjectMapper mapper = new ObjectMapper();
+-        String newVisitAsJSON = mapper.writeValueAsString(visitMapper.toVisitDto(newVisit));
++        String newVisitAsJSON = "{\"date\":\"2013-01-01\",\"description\":null,\"petId\":8}";
+     	this.mockMvc.perform(post("/api/visits")
+         		.content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+         		.andExpect(status().isBadRequest());
+      }
+ 
++    @Test
++    @WithMockUser(roles="OWNER_ADMIN")
++    void testCreateVisitEmptyDescriptionReturns400() throws Exception {
++        String newVisitAsJSON = "{\"date\":\"2013-01-01\",\"description\":\"\",\"petId\":8}";
++        this.mockMvc.perform(post("/api/visits")
++                .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
++            .andExpect(status().isBadRequest());
++    }
++
++    @Test
++    @WithMockUser(roles="OWNER_ADMIN")
++    void testCreateVisitNegativePetIdReturns400() throws Exception {
++        String newVisitAsJSON = "{\"date\":\"2013-01-01\",\"description\":\"rabies shot\",\"petId\":-1}";
++        this.mockMvc.perform(post("/api/visits")
++                .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
++            .andExpect(status().isBadRequest());
++    }
++
+     @Test
+     @WithMockUser(roles="OWNER_ADMIN")
+     void testUpdateVisitSuccess() throws Exception {
+@@ -209,10 +223,7 @@ class VisitRestControllerV1Tests {
+     @Test
+     @WithMockUser(roles="OWNER_ADMIN")
+     void testUpdateVisitError() throws Exception {
+-    	Visit newVisit = visits.get(0);
+-        newVisit.setDescription(null);
+-    	ObjectMapper mapper = new ObjectMapper();
+-        String newVisitAsJSON = mapper.writeValueAsString(visitMapper.toVisitDto(newVisit));
++        String newVisitAsJSON = "{\"date\":\"2013-01-01\",\"description\":null,\"petId\":8}";
+     	this.mockMvc.perform(put("/api/visits/2")
+     		.content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+         	.andExpect(status().isBadRequest());
+diff --git a/src/test/java/org/springframework/samples/petclinic/rest/model/PetDtoTests.java b/src/test/java/org/springframework/samples/petclinic/rest/model/PetDtoTests.java
+new file mode 100644
+index 0000000..f0b173b
+--- /dev/null
++++ b/src/test/java/org/springframework/samples/petclinic/rest/model/PetDtoTests.java
+@@ -0,0 +1,130 @@
++package org.springframework.samples.petclinic.rest.model;
++
++import static org.assertj.core.api.Assertions.assertThat;
++import static org.assertj.core.api.Assertions.assertThatThrownBy;
++
++import java.time.LocalDate;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Set;
++
++import jakarta.validation.ConstraintViolation;
++
++import org.junit.jupiter.api.Test;
++import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
++import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
++
++import tools.jackson.core.JacksonException;
++import tools.jackson.databind.json.JsonMapper;
++
++class PetDtoTests {
++
++    private static final LocalDate BIRTH = LocalDate.of(2010, 9, 7);
++
++    private PetTypeDto type() {
++        return new PetTypeDto("cat", 1);
++    }
++
++    @Test
++    void buildsValidRecord() {
++        PetDto pet = new PetDto("Leo", BIRTH, type(), 1, 2, List.of());
++        assertThat(pet.name()).isEqualTo("Leo");
++        assertThat(pet.birthDate()).isEqualTo(BIRTH);
++        assertThat(pet.type().getName()).isEqualTo("cat");
++        assertThat(pet.id()).isEqualTo(1);
++        assertThat(pet.ownerId()).isEqualTo(2);
++    }
++
++    @Test
++    void rejectsNullName() {
++        assertThatThrownBy(() -> new PetDto(null, BIRTH, type(), 1, 2, List.of()))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("name");
++    }
++
++    @Test
++    void rejectsTooLongName() {
++        assertThatThrownBy(() -> new PetDto("x".repeat(31), BIRTH, type(), 1, 2, List.of()))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("name");
++        assertThat(new PetDto("x".repeat(30), BIRTH, type(), 1, 2, List.of()).name()).hasSize(30);
++    }
++
++    @Test
++    void allowsEmptyName() {
++        assertThat(new PetDto("", BIRTH, type(), 1, 2, List.of()).name()).isEmpty();
++    }
++
++    @Test
++    void rejectsNullBirthDateAndType() {
++        assertThatThrownBy(() -> new PetDto("Leo", null, type(), 1, 2, List.of()))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("birthDate");
++        assertThatThrownBy(() -> new PetDto("Leo", BIRTH, null, 1, 2, List.of()))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("type");
++    }
++
++    @Test
++    void rejectsNegativeIds() {
++        assertThatThrownBy(() -> new PetDto("Leo", BIRTH, type(), -1, 2, List.of()))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("id");
++        assertThatThrownBy(() -> new PetDto("Leo", BIRTH, type(), 1, -1, List.of()))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("ownerId");
++    }
++
++    @Test
++    void acceptsNullIds() {
++        PetDto pet = new PetDto("Leo", BIRTH, type(), null, null, List.of());
++        assertThat(pet.id()).isNull();
++        assertThat(pet.ownerId()).isNull();
++    }
++
++    @Test
++    void nullVisitsBecomeEmptyList() {
++        assertThat(new PetDto("Leo", BIRTH, type(), 1, 2, null).visits()).isEmpty();
++    }
++
++    @Test
++    void visitsAreDefensivelyCopiedAndImmutable() {
++        List<VisitDto> source = new ArrayList<>();
++        source.add(new VisitDto(null, "d", 1, 1));
++        PetDto pet = new PetDto("Leo", BIRTH, type(), 1, 2, source);
++        source.add(new VisitDto(null, "e", 2, 1));
++        assertThat(pet.visits()).hasSize(1);
++        assertThatThrownBy(() -> pet.visits().add(new VisitDto(null, "f", 3, 1)))
++            .isInstanceOf(UnsupportedOperationException.class);
++    }
++
++    @Test
++    void futureBirthDateIsReportedByValidator() {
++        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
++        validator.afterPropertiesSet();
++        PetDto pet = new PetDto("Leo", LocalDate.now().plusDays(5), type(), 1, 2, List.of());
++        Set<ConstraintViolation<PetDto>> violations = validator.validate(pet);
++        assertThat(violations).extracting(c -> c.getPropertyPath().toString()).contains("birthDate");
++        assertThat(validator.validate(new PetDto("Leo", BIRTH, type(), 1, 2, List.of()))).isEmpty();
++    }
++
++    @Test
++    void jsonRoundTripKeepsPropertyNamesAndDateFormat() {
++        JsonMapper mapper = JsonMapper.builder().build();
++        PetDto pet = new PetDto("Leo", BIRTH, type(), 1, 2, List.of(new VisitDto(BIRTH, "d", 3, 1)));
++        String json = mapper.writeValueAsString(pet);
++        assertThat(json).contains("\"name\":\"Leo\"").contains("\"birthDate\":\"2010-09-07\"")
++            .contains("\"ownerId\":2").contains("\"visits\":[").contains("\"petId\":1");
++        assertThat(mapper.readValue(json, PetDto.class)).isEqualTo(pet);
++    }
++
++    @Test
++    void jsonWithoutVisitsDeserializesToEmptyList() {
++        JsonMapper mapper = JsonMapper.builder().build();
++        PetDto pet = mapper.readValue(
++            "{\"name\":\"Leo\",\"birthDate\":\"2010-09-07\",\"type\":{\"name\":\"cat\",\"id\":1}}", PetDto.class);
++        assertThat(pet.visits()).isEmpty();
++    }
++
++    @Test
++    void jsonMissingNameFails() {
++        JsonMapper mapper = JsonMapper.builder().build();
++        assertThatThrownBy(() -> mapper.readValue(
++            "{\"birthDate\":\"2010-09-07\",\"type\":{\"name\":\"cat\",\"id\":1}}", PetDto.class))
++            .isInstanceOf(JacksonException.class);
++    }
++}
+diff --git a/src/test/java/org/springframework/samples/petclinic/rest/model/VisitDtoTests.java b/src/test/java/org/springframework/samples/petclinic/rest/model/VisitDtoTests.java
+new file mode 100644
+index 0000000..863d631
+--- /dev/null
++++ b/src/test/java/org/springframework/samples/petclinic/rest/model/VisitDtoTests.java
+@@ -0,0 +1,80 @@
++package org.springframework.samples.petclinic.rest.model;
++
++import static org.assertj.core.api.Assertions.assertThat;
++import static org.assertj.core.api.Assertions.assertThatThrownBy;
++
++import java.time.LocalDate;
++
++import org.junit.jupiter.api.Test;
++
++import tools.jackson.core.JacksonException;
++import tools.jackson.databind.json.JsonMapper;
++
++class VisitDtoTests {
++
++    @Test
++    void buildsValidRecord() {
++        VisitDto visit = new VisitDto(LocalDate.of(2013, 1, 1), "rabies shot", 1, 2);
++        assertThat(visit.date()).isEqualTo(LocalDate.of(2013, 1, 1));
++        assertThat(visit.description()).isEqualTo("rabies shot");
++        assertThat(visit.id()).isEqualTo(1);
++        assertThat(visit.petId()).isEqualTo(2);
++    }
++
++    @Test
++    void acceptsNullIdAndDate() {
++        VisitDto visit = new VisitDto(null, "checkup", null, 2);
++        assertThat(visit.id()).isNull();
++        assertThat(visit.date()).isNull();
++    }
++
++    @Test
++    void rejectsNullDescription() {
++        assertThatThrownBy(() -> new VisitDto(null, null, 1, 2))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("description");
++    }
++
++    @Test
++    void rejectsEmptyDescription() {
++        assertThatThrownBy(() -> new VisitDto(null, "", 1, 2))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("description");
++    }
++
++    @Test
++    void rejectsTooLongDescription() {
++        assertThatThrownBy(() -> new VisitDto(null, "x".repeat(256), 1, 2))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("description");
++        assertThat(new VisitDto(null, "x".repeat(255), 1, 2).description()).hasSize(255);
++    }
++
++    @Test
++    void rejectsNullOrNegativePetId() {
++        assertThatThrownBy(() -> new VisitDto(null, "d", 1, null))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("petId");
++        assertThatThrownBy(() -> new VisitDto(null, "d", 1, -1))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("petId");
++    }
++
++    @Test
++    void rejectsNegativeId() {
++        assertThatThrownBy(() -> new VisitDto(null, "d", -1, 2))
++            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("id");
++    }
++
++    @Test
++    void jsonRoundTripKeepsPropertyNamesAndDateFormat() {
++        JsonMapper mapper = JsonMapper.builder().build();
++        VisitDto visit = new VisitDto(LocalDate.of(2013, 1, 1), "rabies shot", 1, 2);
++        String json = mapper.writeValueAsString(visit);
++        assertThat(json).contains("\"date\":\"2013-01-01\"").contains("\"description\":\"rabies shot\"")
++            .contains("\"id\":1").contains("\"petId\":2");
++        assertThat(mapper.readValue(json, VisitDto.class)).isEqualTo(visit);
++    }
++
++    @Test
++    void jsonMissingDescriptionFails() {
++        JsonMapper mapper = JsonMapper.builder().build();
++        assertThatThrownBy(() -> mapper.readValue("{\"petId\":1}", VisitDto.class))
++            .isInstanceOf(JacksonException.class);
++    }
++}

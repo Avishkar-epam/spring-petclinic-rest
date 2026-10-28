@@ -1,0 +1,3 @@
+{"task_id":"1","status":"done","commit":"78b6566","test_command":"./mvnw.cmd -q clean test -Dtest=VisitDtoTests,PetDtoTests"}
+{"task_id":"2","status":"done","commit":"375bc78","test_command":"./mvnw.cmd -q clean compile"}
+{"task_id":"3","status":"done","commit":"1ec5d46","test_command":"./mvnw.cmd clean verify"}

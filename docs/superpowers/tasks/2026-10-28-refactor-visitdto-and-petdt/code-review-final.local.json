@@ -1,0 +1,26 @@
+{
+  "decision": "request-changes",
+  "rationale": "Acceptance did not run (no spec), so confidence is low. One blocking test gap: the new global HttpMessageNotReadableException 400 handler has no response-body assertion. 2 deferred (null visit date, empty pet name; both pre-existing per the spec, see code-review-deferred.local.md), 17 dismissed as handled, spec-conformant, or below the emission floor.",
+  "confidence": "low",
+  "risk_flags": [],
+  "business_review": [],
+  "standards_review": [
+    { "kind": "commit-format", "status": "na", "notes": "Standards audit not expected for this profile." },
+    { "kind": "code-quality", "status": "na", "notes": "Standards audit not expected for this profile." },
+    { "kind": "security", "status": "na", "notes": "Standards audit not expected for this profile." }
+  ],
+  "findings": [
+    {
+      "id": "CR-001",
+      "kind": "code",
+      "severity": "major",
+      "triage": "patch",
+      "file": "src/test/java/org/springframework/samples/petclinic/rest/controller/VisitRestControllerV1Tests.java",
+      "line": 177,
+      "title": "Unreadable-body 400 handler body is unasserted",
+      "problem": "The new HttpMessageNotReadableException handler (ExceptionControllerAdvice.java:159-169) is global and now serves every record-constructor rejection and every malformed body. Every added 400 test (testCreateVisitError, testCreateVisitEmptyDescriptionReturns400, testCreateVisitNegativePetIdReturns400, testUpdatePetNullNameReturns400, testUpdatePetTooLongNameReturns400) asserts only status().isBadRequest(). The sibling MethodArgumentNotValid and 500 paths do assert title and detail. The handler currently passes the constant ERROR_INVALID_REQUEST as detail, so nothing leaks today.",
+      "impact": "A later change to the handler's detail (for example e.getMessage()) would leak Jackson internals and record constructor messages to clients, and no test would fail.",
+      "recommendation": "In VisitRestControllerV1Tests.testCreateVisitError and PetRestControllerV1Tests.testUpdatePetNullNameReturns400, add jsonPath assertions for $.title (HttpMessageNotReadableException) and $.detail (The request contains invalid or missing parameters), and assert the body does not contain the record constructor message (e.g. \"description must be between\")."
+    }
+  ]
+}

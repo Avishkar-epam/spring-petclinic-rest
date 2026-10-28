@@ -1,0 +1,4 @@
+# Deferred from code review — 2026-10-28-refactor-visitdto-and-petdt (2026-10-28)
+
+- **Visit date may be null** — `src/main/java/org/springframework/samples/petclinic/rest/model/VisitDto.java:33` — a POST with omitted `date` is accepted, saved with a null date, and `Pet.getVisits()` then NPEs in its date sort. Pre-existing: the OpenAPI `VisitFields.date` was already optional and the generated DTO accepted null; the record mirrors the spec.
+- **Empty pet name passes DTO validation** — `src/main/java/org/springframework/samples/petclinic/rest/model/PetDto.java:68` — an empty-string name is accepted by the DTO, then fails entity `@NotEmpty` at save and surfaces as 500. Pre-existing: `PetFields.name` in the spec has `maxLength: 30` and no `minLength`, and the generated DTO behaved the same way.
