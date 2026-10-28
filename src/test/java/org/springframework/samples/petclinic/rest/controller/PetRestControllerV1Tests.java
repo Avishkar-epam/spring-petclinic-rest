@@ -27,8 +27,8 @@ import org.springframework.samples.petclinic.mapper.PetMapper;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.rest.advice.ExceptionControllerAdvice;
 import org.springframework.samples.petclinic.rest.dto.OwnerDto;
+import org.springframework.samples.petclinic.rest.dto.PetDto;
 import org.springframework.samples.petclinic.rest.dto.PetTypeDto;
-import org.springframework.samples.petclinic.rest.model.PetDto;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.clinicService.ApplicationTestConfig;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -92,12 +92,24 @@ class PetRestControllerV1Tests {
         petType.id(2)
             .name("dog");
 
-        pets.add(new PetDto("Rosy", LocalDate.now(), petType, 3, null, List.of()));
-        pets.add(new PetDto("Jewel", LocalDate.now(), petType, 4, null, List.of()));
+        pets.add(petDto("Rosy", LocalDate.now(), petType, 3, null, List.of()));
+        pets.add(petDto("Jewel", LocalDate.now(), petType, 4, null, List.of()));
     }
 
     private static PetDto withName(PetDto pet, String name) {
-        return new PetDto(name, pet.birthDate(), pet.type(), pet.id(), pet.ownerId(), pet.visits());
+        return petDto(name, pet.getBirthDate(), pet.getType(), pet.getId(), pet.getOwnerId(), pet.getVisits());
+    }
+
+    private static PetDto petDto(String name, LocalDate birthDate, PetTypeDto type, Integer id,
+                                 Integer ownerId, List<?> visits) {
+        PetDto dto = new PetDto();
+        dto.setName(name);
+        dto.setBirthDate(birthDate);
+        dto.setType(type);
+        dto.setId(id);
+        dto.setOwnerId(ownerId);
+        dto.setVisits((List) visits);
+        return dto;
     }
 
     @Test

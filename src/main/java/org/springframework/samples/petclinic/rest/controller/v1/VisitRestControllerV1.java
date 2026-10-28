@@ -23,7 +23,7 @@ import org.springframework.samples.petclinic.mapper.VisitMapper;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.rest.api.VisitsApi;
-import org.springframework.samples.petclinic.rest.model.VisitDto;
+import org.springframework.samples.petclinic.rest.dto.VisitDto;
 import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -78,15 +78,15 @@ public class VisitRestControllerV1 implements VisitsApi {
     @Override
     public ResponseEntity<VisitDto> addVisit(VisitDto visitDto) {
         HttpHeaders headers = new HttpHeaders();
-        LocalDate visitDate = visitDto.date();
+        LocalDate visitDate = visitDto.getDate();
         if (visitDate != null && visitDate.isBefore(LocalDate.now())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Pet pet = this.clinicService.findPetById(visitDto.petId());
+        Pet pet = this.clinicService.findPetById(visitDto.getPetId());
         if (pet == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        boolean duplicateVisit = this.clinicService.findVisitsByPetId(visitDto.petId()).stream()
+        boolean duplicateVisit = this.clinicService.findVisitsByPetId(visitDto.getPetId()).stream()
             .anyMatch(existingVisit -> visitDate != null && visitDate.equals(existingVisit.getDate()));
         if (duplicateVisit) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

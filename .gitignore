@@ -24,3 +24,18 @@ springboot-petclinic-server/
 
 # newman reports
 ./src/test/postman/reports/
+
+# AI
+.ai-run/guides/
+.ai-run/sdlc-factory/
+.ai-run/runs/
+.agents/memory/sdlc/daily/
+docs/superpowers/tasks/*/**/*.local.*
+docs/superpowers/tasks/*/**/*.local/
+docs/superpowers/tasks/*/**/task-*-brief.md
+docs/superpowers/tasks/*/**/task-*-report.md
+docs/superpowers/qa-tasks/*/**/*.local.*
+.claude/settings.local.json
+*.md
+.vscode/settings.json
+docs/superpowers/tasks/2026-10-28-refactor-visitdto-and-petdt/state.local.json

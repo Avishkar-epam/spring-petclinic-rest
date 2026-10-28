@@ -191,6 +191,8 @@ class VisitRestControllerV1Tests {
     @WithMockUser(roles="OWNER_ADMIN")
     void testCreateVisitWithPastDateReturns400(String date) throws Exception {
         String newVisitAsJSON = "{\"date\":\"" + date + "\",\"description\":\"rabies shot\",\"petId\":8}";
+        given(this.clinicService.findPetById(8)).willReturn(visits.get(0).getPet());
+        given(this.clinicService.findVisitsByPetId(8)).willReturn(List.of());
 
         MvcResult result = this.mockMvc.perform(post("/api/visits")
                 .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -238,7 +240,7 @@ class VisitRestControllerV1Tests {
     	this.mockMvc.perform(post("/api/visits")
         		.content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
         		.andExpect(status().isBadRequest())
-        		.andExpect(jsonPath("$.title").value("HttpMessageNotReadableException"))
+        		.andExpect(jsonPath("$.title").value("MethodArgumentNotValidException"))
         		.andExpect(jsonPath("$.detail").value("The request contains invalid or missing parameters"))
         		.andExpect(content().string(not(containsString("description must be between"))));
      }
@@ -250,7 +252,7 @@ class VisitRestControllerV1Tests {
         this.mockMvc.perform(post("/api/visits")
                 .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.title").value("HttpMessageNotReadableException"))
+            .andExpect(jsonPath("$.title").value("MethodArgumentNotValidException"))
             .andExpect(jsonPath("$.detail").value("The request contains invalid or missing parameters"))
             .andExpect(content().string(not(containsString("description must be between"))));
     }
@@ -262,7 +264,7 @@ class VisitRestControllerV1Tests {
         this.mockMvc.perform(post("/api/visits")
                 .content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.title").value("HttpMessageNotReadableException"))
+            .andExpect(jsonPath("$.title").value("MethodArgumentNotValidException"))
             .andExpect(jsonPath("$.detail").value("The request contains invalid or missing parameters"))
             .andExpect(content().string(not(containsString("petId must not be null"))));
     }

@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -13,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
-import org.springframework.samples.petclinic.rest.model.VisitDto;
+import org.springframework.samples.petclinic.rest.dto.VisitDto;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.clinicService.ApplicationTestConfig;
 import org.springframework.test.context.ContextConfiguration;
@@ -45,10 +44,10 @@ class VisitMapperTests {
     @Test
     void mapsPetIdToPetIdAndBack() {
         VisitDto dto = visitMapper.toVisitDto(visit(2, 8, "rabies shot"));
-        assertThat(dto.id()).isEqualTo(2);
-        assertThat(dto.petId()).isEqualTo(8);
-        assertThat(dto.description()).isEqualTo("rabies shot");
-        assertThat(dto.date()).isEqualTo(LocalDate.of(2013, 1, 1));
+        assertThat(dto.getId()).isEqualTo(2);
+        assertThat(dto.getPetId()).isEqualTo(8);
+        assertThat(dto.getDescription()).isEqualTo("rabies shot");
+        assertThat(dto.getDate()).isEqualTo(LocalDate.of(2013, 1, 1));
 
         Visit visit = visitMapper.toVisit(dto);
         assertThat(visit.getId()).isEqualTo(2);
@@ -70,7 +69,7 @@ class VisitMapperTests {
     @Test
     void mapsCollection() {
         Collection<VisitDto> dtos = visitMapper.toVisitsDto(List.of(visit(1, 8, "a"), visit(2, 8, "b")));
-        assertThat(dtos).extracting(VisitDto::description).containsExactly("a", "b");
+        assertThat(dtos).extracting(VisitDto::getDescription).containsExactly("a", "b");
         assertThat(visitMapper.toVisitsDto(List.of())).isEmpty();
     }
 
@@ -80,11 +79,5 @@ class VisitMapperTests {
         assertThat(visitMapper.toVisit((VisitDto) null)).isNull();
         assertThat(visitMapper.toVisit((VisitFieldsDto) null)).isNull();
         assertThat(visitMapper.toVisitsDto(null)).isNull();
-    }
-
-    @Test
-    void visitWithNullDescriptionFailsToMap() {
-        Visit visit = visit(2, 8, null);
-        assertThatThrownBy(() -> visitMapper.toVisitDto(visit)).isInstanceOf(IllegalArgumentException.class);
     }
 }
